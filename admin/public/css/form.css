@@ -1,0 +1,39 @@
+form{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+.form_group{
+    display: flex;
+    flex-direction: column;
+}
+label{
+    margin-bottom: 15px;
+}
+input,select{
+    
+    padding-left: 10px;
+    outline-color: #009CFF;
+
+    
+}
+textarea{
+    padding-top: 10px;
+    padding-left: 10px;
+    outline-color: #009CFF;
+
+}
+.btn_add button{
+    width: 100px;
+    margin-top: 40px;
+    height: 40px;
+    background: white;
+    border-color: #009CFF;
+    color: #009CFF;
+}
+.btn_add button:hover{
+    color: white;
+    background: #009CFF;
+}
+
+

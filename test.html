@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .chilren img{
+      width: 10%;
+    }
+</style>
+<body>
+    <div class="container">
+        <img src="./src/image/dh.png" alt="" id="img-main">
+        <div class="chilren">
+           
+           <img src="./src/image/lap1.png" alt="" onclick="image('one')" id="one">
+            <img src="./src/image/lap2.png" alt="" onclick="image('two')" id="two">
+            <img src="./src/image/lap3.png" alt="" onclick="image('three')" id="three">
+            <img src="./src/image/dh.png" alt="" onclick="image('four')" id="four">
+        
+        </div>
+    </div>
+</body>
+<script>
+     function image(id){
+        let img = document.getElementById(id).getAttribute('src');
+        console.log(img);
+        document.getElementById("img-main").setAttribute('src', img)
+       
+     }
+</script>
+</html>
