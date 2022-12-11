@@ -32,6 +32,8 @@
     $product5 = getAll($query);
     $query = "SELECT * FROM products where categoryId=8 and productPrice <= $price ";
     $product8 = getAll($query);
+
+    
 }
    }
     
