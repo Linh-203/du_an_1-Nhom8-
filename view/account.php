@@ -61,7 +61,8 @@ if(isset($_POST["submit"])){
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>HIGH TECH</title>
+  <link rel="shortcut icon" href="../src/image/tech.png" type="image/x-icon">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -237,13 +238,13 @@ if(isset($_POST["submit"])){
             <a href="./change_pass.php" style=" "><i style="font-size: 20px;margin-right: 5px;" class="fab fa-expeditedssl" style="margin-right: 3px;"></i> Đổi mật khẩu</a> <br>
             <a href="./list-bill.php"><i class="fas fa-money-bill-alt" style="font-size: 20px; margin-right: 5px;"></i> Đơn mua</a> <br>
             <a href="./voucher.php"> <i class="fas fa-tags" style="font-size: 20px;margin-right: 5px;"></i> Ưu đãi cho bạn</a> <br>
-            <a href=""><i style="font-size: 20px;margin-right: 5px;" class="fa-solid fa-map-location-dot"></i> Địa chỉ</a> <br>
+            <a href="./adress.php"><i style="font-size: 20px;margin-right: 5px;" class="fa-solid fa-map-location-dot"></i> Địa chỉ</a> <br>
             <a href=""><i style="font-size: 20px;margin-right: 5px;" class="fas fa-bell"></i> Thông báo</a> <br>
 
             </div>
             </aside>
             <article style="margin-top: 50px; width: 70%;background-color: white;padding-left: 50px;">
-          <h2>  Hồ sơ của tôi</h2>
+          <h2 style="border-left: 5px solid #ee4d2d;padding-left: 10px;display: inline;">  Hồ sơ của tôi</h2>
  
  <hr>
             <form style="display: flex; justify-content: space-between;" method="POST" enctype="multipart/form-data">

@@ -60,7 +60,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=fire">
-    <title>Document</title>
+    <title>HIGH TECH</title>
+  <link rel="shortcut icon" href="../src/image/tech.png" type="image/x-icon">
     
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
 

@@ -30,20 +30,11 @@ if (isset($_POST["vnpay"])) {
 
 if (isset($_POST["submit"])) {
 
-    if (empty($_POST["pay"])) {
-
-        $payErr = "Không được bỏ trống";
-    }
-
     if (empty($_POST["adress"])) {
         $adressErr = "Không được bỏ trống";
-    }
-
-
-    if (!empty($_POST["pay"]) && !empty($_POST["adress"])) {
-
+    }else{
         $note = $_POST["note"];
-        $pay = $_POST["pay"];
+        $pay = 0;
         $status = $_POST["status"];
         $username = $_POST["username"];
         $adress = $_POST["adress"];
@@ -85,9 +76,13 @@ if (isset($_POST["submit"])) {
                 connect($query);
                 unset($_SESSION["cart"]);
                 $code = $_SESSION["code"];
-              
-                $delete = "DELETE FROM voucher_detail where id_user like n'$id_person' and id_voucher like n'$code' ";
-                connect($delete);
+                if ($_SESSION["quantity_voucher"] <= 1) {
+                    $delete = "DELETE FROM voucher_detail where id_user like n'$id_person' and id_voucher like n'$code' ";
+                    connect($delete);
+                } else {
+                    $sql = "UPDATE voucher_detail SET quantity = quantity - 1 where id_user like n'$id_person' and id_voucher like n'$code'";
+                    connect($sql);
+                }
                 header("location:./alert.php");
             }
         }
@@ -112,13 +107,34 @@ if (isset($_POST["submit"])) {
     <script src="https://kit.fontawesome.com/969bec5078.js" crossorigin="anonymous"></script>
 </head>
 <style>
+    #oder{
+        transition: linear 1s;
+        background-color: #E4002B;cursor: pointer;font-size: 20px;color: white;padding: 0 20px;margin: 10px 0;border-radius: 35px;width: 400px;
+    }
+    #oder:hover{
+        background-color: white;
+        border: 1px solid #E4002B;
+        color: #E4002B;
+    }
+    #oder2{
+        transition: linear 1s;
+        border: 1px solid #4fba69;
+        cursor: pointer;display: flex;align-items: center;justify-content: center;background: linear-gradient(90deg,#97c93d,#4fba69);;color:white;width: 400px;padding: 20px;font-size: 20px;border-radius: 35px;
+    }
+    #oder2:hover{
+        background:none;
+        border: 1px solid #4fba69;
+        color: #4fba69;
+    }
     .form_adress input {
         width: 400px;
         padding: 5px 10px;
         font-size: 20px;
         outline: none;
         margin-bottom: 10px;
-        border: 1px solid lightgray;
+        border: 1px solid #ccc;
+       border-radius: 4px;
+       color: #555;
 
     }
 
@@ -327,26 +343,24 @@ if (isset($_POST["submit"])) {
                                                                                                         echo $_SESSION["note"];
                                                                                                     } ?>"> <br>
                         <label for="">Chọn hình thức thanh toán:</label> <br>
-                        <input style="width: 18px;height: 18px;" type="radio" name="pay" id="dialog" value="1"> Nhận hàng rồi thanh toán <br>
-                        <div id="vi" style="display: none;background-color: lavenderblush;padding: 10px;">
+                        <button id="oder" onclick="return confirm('Bạn chắc chứ')"  type="submit" name="submit">Nhận hàng rồi thanh toán</button>
+
+                        <!-- <input style="width: 18px;height: 18px;" type="radio" name="pay" id="dialog" value="1"> Nhận hàng rồi thanh toán <br> -->
+                        <!-- <div id="vi" style="display: none;background-color: lavenderblush;padding: 10px;">
                             <p style="display: flex;align-items: center;"> <img height="30px" style="margin-right: 10px;" src="https://fptsupport.com.vn/wp-content/uploads/2020/12/icon-thanh-toan.png" alt="">Sau khi nhận hàng kiểm tra rồi thanh toán</p>
-                        </div>
-                        <input style="width: 18px;height: 18px;" type="radio" name="pay" id="dialog2" value="1"> Thanh toán trực tuyến <br>
-                        <div style="display: none;background-color: lavenderblush;padding: 10px;" id="vi2">
+                        </div> -->
+                        <!-- <input style="width: 18px;height: 18px;" type="radio" name="pay" id="dialog2" value="1"> Thanh toán trực tuyến <br> -->
+                       
 
-                            <p class="pay">
+                            <button id="oder2"  type="submit" name="vnpay">
+                                <img height="40px" style="margin-right: 10px;" src="https://play-lh.googleusercontent.com/DvCn_h3AdLNNDcv3ftqTqP83gw6h65GMEPg3x6u788wB3F3ENNFcHgrHcWJNOPy4epg" alt=""> Thanh toán bằng VNPAY
+                            </button>
 
-                                <button type="submit" name="vnpay" style="cursor: pointer;display: flex;align-items: center;">
-                                    <img height="40px" style="margin-right: 10px;" src="https://play-lh.googleusercontent.com/DvCn_h3AdLNNDcv3ftqTqP83gw6h65GMEPg3x6u788wB3F3ENNFcHgrHcWJNOPy4epg" alt=""> Thanh toán bằng VNPAY
-                                </button>
+                       
+                    
 
-                            </p>
-
-                        </div> <br>
-
-                        <span id="err"><?php echo $payErr ?></span> <br>
-                        <button onclick="return confirm('Bạn chắc chứ')" style="background: linear-gradient(90deg,#97c93d,#4fba69);font-size: 20px;color: white;padding: 0 10px;" type="submit" name="submit">Đặt hàng</button>
-                        <button type="reset" style="background-color: #1a9cb7;color: white; padding:0 10px;font-size: 20px;">Nhập lại</button>
+                     
+                        <!-- <button type="reset" style="background-color: #1a9cb7;color: white; padding:0 10px;font-size: 20px;">Nhập lại</button> -->
                     </form>
 
                 </div>
@@ -392,7 +406,7 @@ if (isset($_POST["submit"])) {
 
                         </tbody>
                     </table>
-                    <form action="" method="post">
+                    <form action="" method="post" style="margin-top: 30px;">
 
                         <?php
                         if (!empty($_SESSION["id"])) {
@@ -403,13 +417,14 @@ if (isset($_POST["submit"])) {
                         $vouchers = getAll($query);
                         ?>
 
-                        <select name="voucher" id="">
+                        <select name="voucher" id="voucher" oninput="return sale()" style="border-radius: 5px;">
                             <option value="" hidden>Mã giảm giá</option>
 
                             <?php foreach ($vouchers as $value) : ?>
                                 <option id="option" value="<?php echo $value["sale"] ?>">Giảm: <?php if ($count_money > $value["condition_V"]) {
                                                                                                     echo $value["sale"]; ?>% với đơn hàng tối thiểu
-                                <?php  } ?>
+                                <?php
+                                                                                                } ?>
                                 <?php
                                 if ($count_money > $value["condition_V"]) {
                                     echo $value["condition_V"];
@@ -417,48 +432,46 @@ if (isset($_POST["submit"])) {
                             <?php endforeach ?>
 
                         </select>
-                        <label style="font-size: 20px;display: flex;align-items: center;" for=""> <img height="25px" src="https://cdn-icons-png.flaticon.com/512/25/25644.png" alt=""> Nhập mã voucher</label>
                         <!-- <input style="width: 300px; font-size: 18px; padding: 8px;outline: none;" type="text" name="voucher" id="voucher" oninput="return sale()" >  -->
                         <!-- <button name="ap_ma" id="ap" disabled style="background-color: blueviolet;color:aliceblue;font-size: 20px; border: 1px solid red;">áp mã</button> -->
-                        <button name="ap_ma" id="ap" style="background-color:lavender; font-size: 20px;padding: 5px; ">Áp mã</button>
+                        <button disabled name="ap_ma" id="ap" style="background-color:lavender; font-size: 20px;padding: 5px;border-radius: 5px; ">Áp dụng</button>
                     </form>
                     <?php
 
-               
+
                     $index = 0;
                     if (isset($_POST["ap_ma"])) {
 
-                        
-                            if (!empty($_POST["voucher"])) {
-                                 
-                                $sale = $_POST["voucher"];
-                                $phan_tram = $_POST["voucher"] / 100;
-                                 
-                                $sql = "SELECT * FROM vocher join voucher_detail ON vocher.code = voucher_detail.id_voucher
+
+                        if (!empty($_POST["voucher"])) {
+
+                            $sale = $_POST["voucher"];
+                            $phan_tram = $_POST["voucher"] / 100;
+
+                            $sql = "SELECT * FROM vocher join voucher_detail ON vocher.code = voucher_detail.id_voucher
                                 where id_user like n'$id_person' and sale = $sale";
-                                $code_voucher = getOne($sql);
-                               $_SESSION["code"] = $code_voucher["code"];
-                               echo  $_SESSION["code"];
-                                ?>
-                              
-                         <?php $tong_tien = $total * $phan_tram;
-                         $tong_tien2 = $total - $tong_tien;
-                       
+                            $code_voucher = getOne($sql);
+                            $_SESSION["code"] = $code_voucher["code"];
+                            $_SESSION["quantity_voucher"] = $code_voucher["quantity"];
+                            //    echo $_SESSION["quantity_voucher"];
+                            //    echo  $_SESSION["code"];
+                    ?>
 
-                                $index += 1;
-                                $_SESSION["total"] = $tong_tien2;
+                    <?php $tong_tien = $total * $phan_tram;
+                            $tong_tien2 = $total - $tong_tien;
 
 
-                                // if ($index == 0) {
-                                //     echo "Mã ko trùng";
-                                //     $tong_tien = $total;
+                            $index += 1;
+                            $_SESSION["total"] = $tong_tien2;
 
-                                // }
-                            }
+
+                            // if ($index == 0) {
+                            //     echo "Mã ko trùng";
+                            //     $tong_tien = $total;
+
+                            // }
                         }
-
-                       
-                    else {
+                    } else {
                         $tong_tien2 = $total;
                         $_SESSION["total"] = $tong_tien2;
                     }

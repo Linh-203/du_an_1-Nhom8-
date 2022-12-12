@@ -49,8 +49,8 @@
           <ul>
             <li><a href="./index.php"><i class="fa fa-home-lg-alt"></i> Trang chủ</a></li>
             <li><a href="./product.php">Sản phẩm</a></li>
-            <li><a href="">Tin tức</a></li>
-            <li><a href="">Giới thiệu</a></li>
+            <li><a href="./news.php">Tin tức</a></li>
+            <li><a href="./gioi_thieu.php">Giới thiệu</a></li>
 
           </ul>
           <font ><marquee direction="left" style="background:orange">Voucher khuyến mãi </marquee></font>

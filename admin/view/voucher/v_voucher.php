@@ -16,7 +16,7 @@
         <tr>
             <th>STT</th>
             <th>Mã voucher</th>
-            <th>Số lần dùng</th>
+            <th>Số lượng</th>
             <th>Mệnh giá</th>
             <th>Ngày hết hạn</th>
             <th>Trạng thái</th>
@@ -27,8 +27,8 @@
         <tr>
             <td><?php echo $key +1 ?></td>
             <td><?php echo $value["code"] ?></td>
-            <td><?php echo $value["turn"] ?></td>
-            <td><?php echo $value["sale"] ?>đ</td>
+            <td><?php echo $value["quantity"] ?></td>
+            <td><?php echo $value["sale"] ?>%</td>
             <td><?php echo $value["out_of_date"] ?></td>
             <td><?php if($value["status"]==1){ ?>
                 Hoạt động

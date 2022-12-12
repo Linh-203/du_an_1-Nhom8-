@@ -215,21 +215,38 @@ $err = "";
             <a href="./account.php" ><i class="fa-regular fa-id-badge" style="margin-right: 5px;font-size: 20px;"></i> Tài khoản của tôi</a> <br>
             <a href="./change_pass.php" style=" "><i style="font-size: 20px;margin-right: 5px;" class="fab fa-expeditedssl" style="margin-right: 3px;"></i> Đổi mật khẩu</a> <br>
             <a href="./list-bill.php"><i class="fas fa-money-bill-alt" style="font-size: 20px; margin-right: 5px;"></i> Đơn mua</a> <br>
-            <a href="./voucher.php" style="background-color: #ee4d2d; width: 83%;color:white" > <i class="fas fa-tags" style="font-size: 20px;margin-right: 5px;"></i> Ưu đãi dành cho bạn</a> <br>
+            <a  style="background-color: #ee4d2d; width: 83%;color:white"  href="./voucher.php"> <i class="fas fa-tags" style="font-size: 20px;margin-right: 5px;"></i> Ưu đãi cho bạn</a> <br>
+            <a href="./adress.php"><i style="font-size: 20px;margin-right: 5px;" class="fa-solid fa-map-location-dot"></i> Địa chỉ</a> <br>
             <a href=""><i style="font-size: 20px;margin-right: 5px;" class="fas fa-bell"></i> Thông báo</a> <br>
+
             </div>
             </aside>
-            <article style="margin-top: 50px; width: 70%;background-color: white;padding-left: 50px;">
-            <h2>Kho voucher</h2>
+            <article style="margin-top: 50px; width: 70%;background-color: white;padding-left: 50px;padding-top: 20px;">
+            <h2 style="border-bottom: 5px solid #ee4d2d;display: inline;">Kho voucher</h2>
             <hr>
-            <div class="voucher" style="display: grid;grid-template-columns: repeat(2,1fr);grid-gap: 20px;">
+            <div class="content" style="display: flex;align-items: center; justify-content: space-between;background-color: rgba(245, 245, 245, 1);padding: 15px 30px;margin-right: 50px;">
+            <div class="menu_child">
+            <a  class="btn btn-primary" href="./voucher_all.php" style="padding: 10px;color: black;border: 1px solid lightgrey;background:none;">Tất cả</a>
+            <a class="btn btn-primary" href="./voucher.php" style="background-color: #337ab7; padding: 10px;color: white;">Của tôi</a>
+            </div>
+            <form action="" method="post" style="display: flex;align-items: center;">
+            <div class="form-group" style="display: flex;align-items: center;padding-top: 12px;">
+      <label for="pwd">Mã voucher</label>
+      <input type="text" class="form-control" placeholder="Nhập mã voucher" name="code_voucher" style="margin: 0 10px;">
+      </div>
+       <button  class="btn btn-primary" style="background-color:#28a745;;">Lưu</button>
+   
+            </form>
+            </div>
+            <div class="voucher" style="display: grid;margin-top: 20px;grid-template-columns: repeat(2,1fr);grid-gap: 20px;">
             <?php foreach($voucher as $value): ?>
                 <div class="colum_voucher" style="display: flex;box-shadow: 0 0 20px lightgrey;">
-                    <img style="height: 130px;" src="https://www.giftpop.vn/upload/shBBS/1534477097.jpg" alt="">
+                    <img style="height: 150px;" src="<?php echo $value["img"] ?>" alt="">
                 
                 <div class="item" style="padding-left: 30px;padding-top: 20px;width: 100%;">
                 <p style="font-size: 20px; font-weight: 500; color:#ee4d2d;">Giảm <?php echo $value["sale"] ?>%</p> 
               <p>Đơn Tối Thiểu: <?php echo $value["condition_V"] ?> ₫</p>
+              <p>Số lượng: <?php echo $value["quantity"] ?></p>
     <p> Có hiệu lực sau: 11 giờ</p>
       <a href="./view_cart.php" style="display: flex;justify-content: right;margin-right: 30px;">Dùng ngay</a>
      
