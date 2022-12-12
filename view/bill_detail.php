@@ -50,7 +50,7 @@ include "../model/connect.php";
     table,td,th{
         padding: 10px;
         font-size: 20px;
-        border-bottom: 10px solid lavenderblush;
+        border-bottom: 10px solid #f7faff;
        border-collapse: collapse;
 
         
@@ -66,42 +66,64 @@ include "../model/connect.php";
     
 </style>
 <body >
-    <div class="container" style="background-color: lavenderblush;">
+    <div class="container" style="background-color: rgba(245, 245, 245, 1);">
        
-    <header>
-            <div class="left">
-            <div class="logo" style="text-align: center;">
-                <img height="60px" src="../src/image/tech.png" alt="">
-                <h4 style="color: lightblue; font-weight: 600; font-size: 20px;">HIGHT-TEACH</h4>
-            </div>
-            <div class="menu">
-                <ul>
-                    <li><a href=""><i class="fa fa-home-lg-alt"></i> Trang chủ</a></li>
-                    <li><a href="">Sản phẩm</a></li>
-                    <li><a href="">Tin tức</a></li>
-                    <li><a href="">Giới thiệu</a></li>
-                    
-                </ul>
-            </div>
-            </div>
-            <div class="right">
-            <form action="">
-                <input type="text" placeholder="Tìm kiếm sản phẩm...">
-                <button><i style="font-size: 20px; " class="fa fa-search"></i></button>
-            </form>
-            <div class="icon" style="display: flex;align-items: center;color: white;">
-            <i style="margin-right: 30px;" class="fa fa-clipboard"></i>
-          <a href="./view_cart.php?id="> <i style="margin-right: 30px;" class="fas fa-shopping-bag"></i></a> 
-          <?php if(empty($_SESSION["id"])){?> 
-          <i class="fas fa-user"></i>
-          <?php } else{?>
-                    <img height="30px" src="<?php echo $_SESSION["avatar"]?>" alt="">
+    <header style="background-color: #131921;">
+      <div class="left">
+        <div class="logo" style="text-align: center;">
+          <img height="60px" src="../src/image/tech.png" alt="">
+          <h4 style="color: lightblue; font-weight: 600; font-size: 20px;">HIGH-TECH</h4>
+        </div>
+       
+      </div>
+      <div class="right">
+        <form action="" style="background-color: white;border-radius: 7px">
+          <input type="text" placeholder="Tìm kiếm sản phẩm..." style="width: 900px;background-color: white;">
+          <button><i style="font-size: 20px;border-radius: 0 7px 7px 0;background-color: rgba(243, 168, 71, 1);height: 40px; padding:10px;text-align: center; " class="fa fa-search"></i></button>
+        </form>
+        <div class="icon" style="display: flex;align-items: center;color: white;">
+        <?php if(!empty($_SESSION["id"])){ ?>
+         <a href="./view/favorite_product.php"><i class="fas fa-heart"></i></a> 
+          <?php }else{ ?>
+           <a href="./login"> <i class="fas fa-heart"></i></a>
             <?php } ?>
-            
-            </div>
-            </div>
-        </header>
-        <p style="font-weight:500;color: green;margin-top: 20px;font-size: 30px;">Chi tiết hóa đơn</p>
+          <a href="./view/list_bill.php"><i style="margin: 0 20px;" class="fas fa-clipboard-list"></i></a>
+
+          <a id="show_cart" style="display: flex; margin-right: 30px;text-decoration: none;" href="./view/view_cart.php?id="> <i id="count" style="margin-right: 30px;color: lavender;" class="fas fa-shopping-bag"></i>
+          
+            <p style="font-size: 14px;background-color: white;border-radius: 100%; height: 20px; width: 20px;text-align: center; margin-left: -40px;color:red; font-weight: 600;">
+              <?php if (!empty($_SESSION["cart"])) {
+                echo $so_luong;
+              } else {
+                echo "0";
+              } ?>
+            </p>
+
+          </a>
+
+          <?php if (empty($_SESSION["id"])) { ?>
+          <a href="./login">  <i class="fas fa-user"></i></a>
+          <?php } else { ?>
+       <a href="./view/account.php"><img height="40px" id="user_hover" width="40px" style="border-radius: 50%;" src="../src/image/<?php echo $_SESSION["avatar"] ?>" alt=""></a>   
+          <?php } ?>
+
+        </div>
+      </div>
+    </header>
+    <!-- <img width="100%" src="https://cdn.watchstore.vn/uploads/productBanners/5pkXymn.jpg" alt=""> -->
+    
+    <div class="menu" style="background-color: #232f3e;padding: 10px;margin-left: 0px;display: flex;justify-content: space-between;">
+          <ul>
+            <li><a href="./index.php"><i class="fa fa-home-lg-alt"></i> Trang chủ</a></li>
+            <li><a href="./product.php">Sản phẩm</a></li>
+            <li><a href="./news.php">Tin tức</a></li>
+            <li><a href="./gioi_thieu.php">Giới thiệu</a></li>
+
+          </ul>
+          <font ><marquee direction="left" style="background:orange">Voucher khuyến mãi </marquee></font>
+        </div>
+        <p style="font-weight:500;color: black;margin-top: 20px;font-size: 30px;border-left: 5px solid #ee4d2d;;padding-left: 10px;">Chi tiết hóa đơn</p>
+        <hr>
         <main style="display: flex;padding: 40px 20px">
         <div class="info" style="font-size:20px;font-weight: 500;">
        <li>Tên người đặt: <?php echo $oder["orderer"]?></li>  
@@ -145,54 +167,31 @@ include "../model/connect.php";
                     <td id="name"><p> <?php echo $value["productName"];  ?></p>
                    <p> <?php echo $value["color"]; ?> x <?php echo $value["quantity_oder"]; ?></p> 
                     </td>
-                    <td id="price"><?php echo $value["price"]?>.000₫</td>
+                    <td id="price"><?php echo $value["price"]?>₫</td>
                   
                    
                 </tr>
                
                 <?php endforeach?>
-                <tr><th id="total" colspan="5">Tổng tiền hàng: <?php echo $value["total_product"]?>.000₫</th></tr> 
+                <tr><th id="total" colspan="5">Tổng tiền hàng: <?php echo $value["total_product"]?>₫</th></tr> 
               
             </tbody>
          </table>
-         <p>Phí vận chuyển:</p>
-         <h3>Tổng thanh toán: <?php echo $oder["total"]?>.000₫</h3>
-        <!-- <?php if($oder["status"]==0 || $oder["status"]==1 ){?>
-         <a onclick="return confirm('Hủy đơn hàng')" style="background-color: red; margin-top: 20px;display: inline-block;font-size: 20px; text-decoration: none; color: white; padding: 05px 10px;" 
-         href="../controller/delete_bill.php?id=<?php echo $id?>">Hủy đơn hàng</a>
-         <?php }else{?>
-            <button style="background-color: lavender;font-size: 20px; padding: 10px;font-weight: 600;">Hủy vào mắt</button>
-            <?php }?> -->
-           
-          <!-- <form action="" method="post">
-          <?php if($oder["status"]==0 || $oder["status"]==1 || $oder["status"]==4 ){?>
+        
+         <h3 style="color:red">Tổng thanh toán: <?php echo $oder["total"]?>₫</h3>
+        
+         <?php $id_oder = $oder["id"] ;
+         ?>
+          <form action="../controller/update_huy.php?id=<?php echo $id_oder ?>" method="post">
+            <?php if($oder["status"]==0 || $oder["status"]==1){ ?>
+                <button name="huy" style="background-color: #ee4d2d;padding: 0 15px;font-size: 20px; border-radius: 5px;color: white;margin-top: 20px;">Hủy</button>
+                <?php }else if($oder["status"]==4){ ?>
+                     <button name="b_huy" style="background-color: green;font-size: 20px;padding: 0 15px; border-radius: 5px;color: white;margin-top: 20px;">Bỏ Hủy</button>
+             <?php   }else{ ?>
+                <button name="huy" disabled style="opacity: 0.4;;background-color: #ee4d2d;padding: 0 15px;font-size: 20px; border-radius: 5px;color: white;margin-top: 20px;">Hủy</button>
 
-          <?php if(isset($_POST["huy"]) ){
-                  $huy = $_POST["huy"];
-              $query = "UPDATE oder SET status=$huy  where id=$id";
-              connect($query);
-             
-              ?>
-                <button type="submit" name="bo_huy" style="color:green" value="0">Bỏ Hủy đơn hàng</button>
-        <?php    }else{?>
-          <button type="submit" name="huy" style="color: red;" value="4">Hủy đơn hàng</button>
-            <?php } ?>
-
-            <?php }else{ ?>
-                <button disabled type="submit" name="huy" >Hủy</button>
-                <?php } ?>
-                <?php if(isset($_POST["bo_huy"])){
-                   $b_huy = $_POST["bo_huy"];
-                   $query1 = "UPDATE oder SET status=$b_huy  where id=$id";
-                   connect($query1);
-                  
-
-                }
-                    ?>
-            
-          </form> -->
-
-          <form action="" method="post"></form>
+              <?php }  ?>
+          </form>
 
 
          </div>

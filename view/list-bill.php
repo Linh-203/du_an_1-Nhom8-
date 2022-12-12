@@ -50,6 +50,19 @@ if(!empty($_SESSION["cart"])){
   <script src="https://kit.fontawesome.com/969bec5078.js" crossorigin="anonymous"></script>
 </head>
 <style>
+  td #detail:hover{
+    background-color: #fff;
+    color: #05d34e;
+  }
+  td #detail{
+    padding: 8px 15px;
+    border: 1px solid #05d34e;
+    background-color: #05d34e;
+    color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: .2s;
+  }
   .typpy_colum{
     display: flex;
     align-items: center;
@@ -263,19 +276,20 @@ tr{
                 </div>
             </div>
             <div class="menu_ac">
-            <a href="./account.php" ><i class="fa-regular fa-id-badge" style="margin-right: 5px;font-size: 20px;"></i> Tài khoản của tôi</a> <br>
-            <a href="./change_pass.php" ><i style="font-size: 20px;margin-right: 5px;" class="fab fa-expeditedssl" style="margin-right: 3px;"></i> Đổi mật khẩu</a> <br>
-            <a href="./list_bill.php" style="background-color: #ee4d2d; width: 83%;color:white"><i class="fas fa-money-bill-alt" style="font-size: 20px; margin-right: 5px;"></i> Đơn mua</a> <br>
-            <a href=""> <i class="fas fa-tags" style="font-size: 20px;margin-right: 5px;"></i> Ưu đãi cho bạn</a> <br>
+            <a href="./account.php"  ><i class="fa-regular fa-id-badge" style="margin-right: 5px;font-size: 20px;"></i> Tài khoản của tôi</a> <br>
+            <a href="./change_pass.php" style=" "><i style="font-size: 20px;margin-right: 5px;" class="fab fa-expeditedssl" style="margin-right: 3px;"></i> Đổi mật khẩu</a> <br>
+            <a  style="background-color: #ee4d2d; width: 83%;color:white"  href="./list-bill.php"><i class="fas fa-money-bill-alt" style="font-size: 20px; margin-right: 5px;"></i> Đơn mua</a> <br>
+            <a href="./voucher.php"> <i class="fas fa-tags" style="font-size: 20px;margin-right: 5px;"></i> Ưu đãi cho bạn</a> <br>
+            <a href="./adress.php"><i style="font-size: 20px;margin-right: 5px;" class="fa-solid fa-map-location-dot"></i> Địa chỉ</a> <br>
             <a href=""><i style="font-size: 20px;margin-right: 5px;" class="fas fa-bell"></i> Thông báo</a> <br>
-            <a href=""><i style="font-size: 20px;margin-right: 5px;" class="fas fa-bell"></i> Địa chỉ</a> <br>
+
             </div>
             </aside>
             <article style="margin-top: 50px; width: 70%;background-color: white;padding: 0 50px;">
              
-             
+             <h2 style="border-left: 5px solid #ee4d2d;display: inline;padding-left: 10px;">Đơn hàng của tôi</h2> <hr>
 
-<div id="myBtnContainer" style="margin-top: 30px;display: flex;justify-content: space-between;align-items: center;">
+<div id="myBtnContainer" style="display: flex;justify-content: space-between;align-items: center;">
 <div>
   <a href="./list-bill.php"> <button class="btn active" onclick="filterSelection('all')"> Tất cả</button></a>
   <a href="./detail_status_bill.php?type=0"><button class="btn" onclick="filterSelection('cho_xac_nhan')"> Chờ xác nhận</button></a> 
@@ -286,7 +300,7 @@ tr{
  </div>
  <img style="" height="100px" src="https://cdn.dribbble.com/users/1101613/screenshots/2570562/delivery-truck.gif" alt="">
 </div>
-<hr>
+
 <form action="./list-bill.php" method="post" style="display: flex;background-color: #eaeaea ;">
               <button name="btn-search" style="padding: 10px;"><i style="font-size: 20px;" class="fa fa-search"></i></button>
               <input name="search" placeholder="Tìm kiếm hóa đơn theo mã " type="text" style="width: 100%;border: none;background-color: #eaeaea;outline: none;">
@@ -332,7 +346,7 @@ tr{
                   <?php  }
                     
                     ?></td>
-                    <td><a href="./bill_detail.php?id=<?php echo $value["id"]?>">Chi tiết</a></td>
+                    <td><a id="detail" style="" href="./bill_detail.php?id=<?php echo $value["id"]?>">Chi tiết</a></td>
                 </tr>
                 <?php endforeach?>
             </tbody>

@@ -1,6 +1,5 @@
 <?php 
 include "../model/connect.php";
-
 $err =$err1=$err2=$err3="";
   if(isset($_POST["btn-submit"])){
      if(empty($_POST["code"])){
@@ -21,16 +20,17 @@ $err =$err1=$err2=$err3="";
        $price = $_POST["price"];
        $turn = $_POST["turn"];
        $date_out = $_POST["date_out"];
-       $query = "INSERT INTO vocher(code, sale, turn, out_of_date) values('$code', '$price', '$turn', '$date_out')";
+       $query = "INSERT INTO vocher(code, sale, quantity, out_of_date,status) values('$code', '$price', '$turn', '$date_out',1)";
         connect($query);
-        echo"Thêm thành công";
-        // header("location:./admin/voucher.php");
+        $alert = "Thêm thành công";
+        //  header("location:./admin/voucher.php");
 
       }
   }
 
 ?>
-
+ <span><?php if(!empty($alert)){
+ echo $alert; }?></span>
 <div class="title_act" style="text-align: center;margin-top: 50px;margin-bottom:30px; background:#009CFF ; height: 60px">
     <h3 style="color: white; padding-top: 15px">VOUCHER - <?php echo strtoupper($_GET['act'])?></h3>
 </div>
@@ -46,7 +46,7 @@ $err =$err1=$err2=$err3="";
                        
                     </div>
                     <div class="form_group">
-                        <label for="">Nhập mệnh giá</label>
+                        <label for="">Nhập mệnh giá %</label>
                         <input class='' type="number" name="price" min="1" max="200000" value="<?php if(!empty($_POST["code"])){
                             echo $_POST["price"];
                         } ?>"> 
@@ -54,7 +54,7 @@ $err =$err1=$err2=$err3="";
 
                     </div>
                     <div class="form_group">
-                        <label for="">Số lần dùng</label>
+                        <label for="">Số lượng</label>
                         <input class='' type="number" name="turn" value="<?php if(!empty($_POST["turn"])){
                             echo $_POST["turn"];
                         } ?>"> 

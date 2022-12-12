@@ -11,7 +11,7 @@
             <th>Image</th>
             <th>Name</th>
             <th>Date</th>
-            <th style="width: 400px;">Banner</th>
+           
             <th>Action</th>
         </tr>
     </thead>
@@ -22,7 +22,7 @@
             <td><img src="../src/image/<?= $value->image?>" alt="" width="50px"></td>
             <td><?= $value->categoryName?></td>
             <td><?= $value->date?></td>
-            <td><img src="<?= $value->banner?>" alt="" width="50%"></td>
+          
             <td>
                 <button class='btn_edit'>
                     <a href="category.php?act=edit&id=<?= $value->id ?>" style="color: white;">Update</a>
