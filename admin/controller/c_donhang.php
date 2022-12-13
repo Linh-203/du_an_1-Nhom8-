@@ -22,7 +22,7 @@ class c_donhang {
                 if (empty($errors)) {
                     $status = $_POST['status'];
                     $received_date = $_POST['date'];
-                    $result = $m_order->update_order($id,$status,$received_date);
+                    $result = $m_order->update_order($id,$status,$received_date,2);
                     if ($result) {
                         echo "<script>alert('Update Thành Công')</script>";
                         

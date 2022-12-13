@@ -16,73 +16,92 @@ include "../model/connect.php";
     ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../src/css/index.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter&family=Quicksand&family=Roboto:wght@100&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/969bec5078.js" crossorigin="anonymous"></script>
-</head>
+<?php include "./public/head.php" ?>
 <style>
    a{
     text-decoration: none;
    }
-  
+   .tippy-content{
+    
+    background-color: #198a19;
+    border-radius: 3px;
+  }
+  a{
+    text-decoration: none;
+  }
+  #ql_tk, #logout{
+    color: black;
+    font-weight: 600;
+  }
+  #logout:hover, #ql_tk:hover{
+    opacity: 0.5;
+  }
+  .typpy_colum{
+    display: flex;
+    align-items: center;
+   
+
+  }
+  .show_type{
+    margin-left: 20px;
+  }
+  .show_cart{
+    width: 200px;
+    
+  }
+  .iteam_cart{
+    width: 100%;
+    height: 150px;
+   
+   
+  }
+  .iteam_cart:hover{
+    opacity: 0.5;
+    
+
+  }
+  .show_cart a{
+    color:white;
+
+  }
+  .show_cart .view_cart_detail{
+    display: inline-block;
+    padding: 10px 5px;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    
+
+    
+  }
+  .show_cart .view_cart_detail:hover{
+  background-color: #97c93d;
+ 
+  }
+  .iteam_cart p{
+    text-overflow: ellipsis;
+    width: 100%;
+    height: 20px;
+    overflow: hidden;
+    display: -webkit-box; 
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    font-size: 14px;
+
+  }
+  .iteam_cart img{
+    width: 50%;
+  }
+  .tippy-content{
+    background-color: #ee4d2d;
+  }
   
     
 </style>
 <body>
     <div class="container">
        
-    <header>
-      <div class="left">
-        <div class="logo" style="text-align: center;">
-          <img height="60px" src="../src/image/tech.png" alt="">
-          <h4 style="color: lightblue; font-weight: 600; font-size: 20px;">HIGHT-TEACH</h4>
-        </div>
-        <div class="menu">
-          <ul>
-            <li><a href="./index.php"><i class="fa fa-home-lg-alt"></i> Trang chủ</a></li>
-            <li><a href="">Sản phẩm</a></li>
-            <li><a href="">Tin tức</a></li>
-            <li><a href="">Giới thiệu</a></li>
-
-          </ul>
-        </div>
-      </div>
-      <div class="right">
-        <form action="">
-          <input type="text" placeholder="Tìm kiếm sản phẩm...">
-          <button><i style="font-size: 20px; " class="fa fa-search"></i></button>
-        </form>
-        <div class="icon" style="display: flex;align-items: center;color: white;">
-       <a href=""> <i class="fas fa-heart"></i></a>  
-          <a href="./view/list_bill.php"><i style="margin: 0 20px;" class="fas fa-clipboard-list"></i></a>
-
-          <a style="display: flex; margin-right: 30px;text-decoration: none;" href="./view/view_cart.php?id="> <i id="count" style="margin-right: 30px;color: lavender;" class="fas fa-shopping-bag"></i>
-            <p style="font-size: 14px;background-color: white;border-radius: 100%; height: 20px; width: 20px;text-align: center; margin-left: -40px;color:red; font-weight: 600;">
-              <?php if (!empty($_SESSION["cart"])) {
-                echo $so_luong;
-              } else {
-                echo "0";
-              } ?>
-            </p>
-
-          </a>
-
-          <?php if (empty($_SESSION["id"])) { ?>
-            <i class="fas fa-user"></i>
-          <?php } else { ?>
-            <img height="35px" style="border-radius: 50%;" src="<?php echo $_SESSION["avatar"] ?>" alt="">
-          <?php } ?>
-
-        </div>
-      </div>
-    </header>
+    <?php include "./public/header.php" ?>
        <main>
         <h2 style="font-weight: 500;">Sản phẩm yêu thích của bạn</h2>
 
@@ -124,11 +143,56 @@ include "../model/connect.php";
             <?php endforeach?>
         </div>
         
-                <footer>
-                    
-                </footer>
+                <?php include "./public/footer.php" ?>
     
     </div>
    
 </body>
+<script>
+   tippy('#user_hover', {
+        content: '<a id="logout" href="../controller/log_out.php">Đăng xuất</a> <br> <a id="ql_tk" href="./account.php">Quản lý tài khoản</a> ',
+        allowHTML: true, 
+        placement: 'bottom-start',
+        delay: [0, 1000],
+        duration: [0, 1000],
+        interactive: true,
+        //  theme: 'light',
+        
+     
+       
+      });
+    
+     tippy('#show_cart', {
+        arrow:false,
+        content: `<?php
+        $index=0;
+          ?>
+              <div class="show_cart"> 
+             <?php foreach($cart as $id => $product):?> 
+
+
+              <div class="iteam_cart"> 
+              <a  href="../detail.php?id=<?php echo $product["id"] ?>">
+             <p><?php echo $product["productName"] ?></p>
+             <div class="typpy_colum">
+             <img src="../src/image/<?php echo $product["images"] ?>" alt="">
+             <div class="show_type">
+            <p><?php echo $product["color"] ?> X <?php echo $product["quantity"] ?></p>
+            <p><?php echo $product["productPrice"] ?>₫</p>
+             </div>
+             </div>
+             </div>
+             </a>
+             
+             <?php endforeach ?>
+             <a class="view_cart_detail" href="./view_cart.php?id=">Xem chi tiết</a>
+             </div>
+         `,
+        allowHTML: true, 
+        placement: 'bottom',
+        delay: [0, 1000],
+        duration: [0, 1000],
+        interactive: true,
+      });
+</script>
 </html>

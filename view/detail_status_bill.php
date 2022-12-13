@@ -24,24 +24,21 @@ if(!empty($_SESSION["cart"])){
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
-  <link rel="stylesheet" href="../src/css/index.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Quicksand&family=Roboto:wght@100&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/969bec5078.js" crossorigin="anonymous"></script>
-</head>
+    <?php include "./public/head.php" ?>
 <style>
+   td #detail:hover{
+    background-color: #fff;
+    color: #05d34e;
+  }
+  td #detail{
+    padding: 8px 15px;
+    border: 1px solid #05d34e;
+    background-color: #05d34e;
+    color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: .2s;
+  }
   .typpy_colum{
     display: flex;
     align-items: center;
@@ -191,57 +188,8 @@ tr{
 
 <body>
   <div class="container">
-
-    <header style="background-color: #131921;">
-      <div class="left">
-        <div class="logo" style="text-align: center;">
-          <img height="60px" src="../src/image/tech.png" alt="">
-          <h4 style="color: lightblue; font-weight: 600; font-size: 20px;">HIGH-TECH</h4>
-        </div>
-       
-      </div>
-      <div class="right">
-        <form action="" style="background-color: white;border-radius: 7px">
-          <input type="text" placeholder="Tìm kiếm sản phẩm..." style="width: 900px;background-color: white;">
-          <button><i style="font-size: 20px;border-radius: 0 7px 7px 0;background-color: rgba(243, 168, 71, 1);height: 40px; padding:10px;text-align: center; " class="fa fa-search"></i></button>
-        </form>
-        <div class="icon" style="display: flex;align-items: center;color: white;">
-          <i class="fas fa-heart"></i>
-          <a href="./view/list_bill.php"><i style="margin: 0 20px;" class="fas fa-clipboard-list"></i></a>
-
-          <a id="show_cart" style="display: flex; margin-right: 30px;text-decoration: none;" href="./view/view_cart.php?id="> <i id="count" style="margin-right: 30px;color: lavender;" class="fas fa-shopping-bag"></i>
-          
-            <p style="font-size: 14px;background-color: white;border-radius: 100%; height: 20px; width: 20px;text-align: center; margin-left: -40px;color:red; font-weight: 600;">
-              <?php if (!empty($_SESSION["cart"])) {
-                echo $so_luong;
-              } else {
-                echo "0";
-              } ?>
-            </p>
-
-          </a>
-
-          <?php if (empty($_SESSION["id"])) { ?>
-            <i class="fas fa-user"></i>
-          <?php } else { ?>
-            <img height="35px" style="border-radius: 50%;" src="../src/image/<?php echo $_SESSION["avatar"] ?>" alt="">
-          <?php } ?>
-
-        </div>
-      </div>
-    </header>
-    <!-- <img width="100%" src="https://cdn.watchstore.vn/uploads/productBanners/5pkXymn.jpg" alt=""> -->
-    
-    <div class="menu" style="background-color: #232f3e;padding: 10px;margin-left: 0px;display: flex;justify-content: space-between;">
-          <ul>
-            <li><a href="./index.php"><i class="fa fa-home-lg-alt"></i> Trang chủ</a></li>
-            <li><a href="">Sản phẩm</a></li>
-            <li><a href="">Tin tức</a></li>
-            <li><a href="">Giới thiệu</a></li>
-
-          </ul>
-          <font ><marquee direction="left" style="background:orange">Voucher khuyến mãi </marquee></font>
-        </div>
+  <?php include "./public/header.php" ?>
+   
         <main style="display: flex;background-color: rgba(245, 245, 245, 1);" >
             <aside style="width: 25%;padding-left: 50px; padding-top: 50px;">
                <div class="avatar" style="display: flex;align-items: center;">
@@ -277,9 +225,9 @@ tr{
  <img style="" height="100px" src="https://cdn.dribbble.com/users/1101613/screenshots/2570562/delivery-truck.gif" alt="">
 </div>
 
-<form action="" method="post" style="display: flex;background-color: #eaeaea ;">
-              <button style="padding: 10px;"><i style="font-size: 20px;" class="fa fa-search"></i></button>
-              <input placeholder="Tìm kiếm hóa đơn theo mã " type="text" style="width: 100%;border: none;background-color: #eaeaea;outline: none;">
+<form action="./list-bill.php" method="post" style="display: flex;background-color: #eaeaea ;">
+              <button name="btn-search" style="padding: 10px;"><i style="font-size: 20px;" class="fa fa-search"></i></button>
+              <input name="search" placeholder="Tìm kiếm hóa đơn theo mã " type="text" style="width: 100%;border: none;background-color: #eaeaea;outline: none;">
              </form>
 <table>
             <thead>
@@ -321,7 +269,7 @@ tr{
                   <?php  }
                     
                     ?></td>
-                    <td><a href="./bill_detail.php?id=<?php echo $value["id"]?>">Chi tiết</a></td>
+                    <td ><a id="detail" href="./bill_detail.php?id=<?php echo $value["id"]?>">Chi tiết</a></td>
                 </tr>
                 <?php endforeach?>
             </tbody>
@@ -334,12 +282,23 @@ tr{
    
   
 
-    <footer>
-
-    </footer>
+    <?php include "./public/footer.php" ?>
 
   </div>
-  
+  <script>
+    tippy('#user_hover', {
+        content: '<a id="logout" href="../controller/log_out.php">Đăng xuất</a> <br> <a id="ql_tk" href="./account.php">Quản lý tài khoản</a> ',
+        allowHTML: true, 
+        placement: 'bottom-start',
+        delay: [0, 1000],
+        duration: [0, 1000],
+        interactive: true,
+        //  theme: 'light',
+        
+     
+       
+      });
+  </script>
 
 </body>
 
@@ -358,7 +317,7 @@ tr{
 
 
               <div class="iteam_cart"> 
-              <a  href="./detail.php?id=<?php echo $product["id"] ?>">
+              <a  href="../detail.php?id=<?php echo $product["id"] ?>">
              <p><?php echo $product["productName"] ?></p>
              <div class="typpy_colum">
              <img src="../src/image/<?php echo $product["images"] ?>" alt="">
@@ -371,7 +330,7 @@ tr{
              </a>
              
              <?php endforeach ?>
-             <a class="view_cart_detail" href="./view/view_cart.php?id=">Xem chi tiết</a>
+             <a class="view_cart_detail" href="./view_cart.php?id=">Xem chi tiết</a>
              </div>
          `,
         allowHTML: true, 

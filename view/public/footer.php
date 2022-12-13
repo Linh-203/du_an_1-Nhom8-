@@ -1,7 +1,7 @@
 <footer>
       <div class="footer">
         <div class="ft-1">
-          <img style="height: 80px; width:130px" src="./src/image/tech.png" alt="">
+          <img style="height: 80px; width:130px" src="../src/image/tech.png" alt="">
           <h4>Siêu thị công nghệ cao</h4>
           <p>Tòa nhà FPT Polytechnic, P. Trịnh Văn Bô, Xuân Phương, Nam Từ Liêm, Hà Nội</p>
           <div class="icon-ft">
