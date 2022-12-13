@@ -18,7 +18,7 @@ class m_order extends database {
         return $this->loadAllRows(array($id));   
     }
     public function update_order($id,$status,$received_date){
-        $sql = "update oder set status = ?, received_date = ? where id = ? ";
+        $sql = "update oder set status = ?, received_date = ?, pay = ? where id = ? ";
         $this->setQuery($sql);
         return $this->execute(array($status,$received_date,$id));
     }

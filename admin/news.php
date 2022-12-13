@@ -1,6 +1,7 @@
 <?php
 
     include ("controller/c_news.php");
+    session_start();
     $news = new c_news();
     if(isset($_GET['act'])){
         $act = $_GET['act'];

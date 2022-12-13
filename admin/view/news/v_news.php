@@ -1,3 +1,4 @@
+
 <div class="title_act" style="text-align: center;margin-top: 50px; background:#009CFF ; height: 60px">
     <h3 style="color: white; padding-top: 15px"><?php echo isset($_GET['module']) == true ? strtoupper($_GET['module']) : "" ?> MANAGEMENT</h3>
 </div>

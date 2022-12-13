@@ -132,7 +132,7 @@ $arrY = array_values($arr);
     <h3>Tổng đơn hàng: <?php echo $oder["quantity"] ?></h3>
     <h3>Tổng bình luận: <?php echo $comment["quantity"] ?></h3>
       <!-- google charts -->
-    <!-- <div id="piechart"></div> --> -->
+    <!-- <div id="piechart"></div> --> 
        <!-- end google charts -->
 
     <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -154,7 +154,7 @@ $arrY = array_values($arr);
       <option value="6">1 tuần</option>
       <option value="29">1 tháng </option>
      </select>
-     <button name="submit" type="submit" style="width: 100px;">Lọc</button>
+     <button name="submit" type="submit" style="width: 100px;border: 1px solid #2e6da4;background-color: #2e6da4;color:white;border-radius: 4px;">Lọc</button>
    </form>
 </body>
 <script type="text/javascript">

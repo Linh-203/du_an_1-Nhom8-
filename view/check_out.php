@@ -91,22 +91,83 @@ if (isset($_POST["submit"])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../src/css/index.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Quicksand&family=Roboto:wght@100&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/969bec5078.js" crossorigin="anonymous"></script>
-</head>
+<?php include "./public/head.php" ?>
 <style>
+    .tippy-content{
+    
+    background-color: #198a19;
+    border-radius: 3px;
+  }
+  a{
+    text-decoration: none;
+  }
+  #ql_tk, #logout{
+    color: white;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  #logout:hover, #ql_tk:hover{
+    opacity: 0.5;
+  }
+  .typpy_colum{
+    display: flex;
+    align-items: center;
+   
+
+  }
+  .show_type{
+    margin-left: 20px;
+  }
+  .show_cart{
+    width: 200px;
+    
+  }
+  .iteam_cart{
+    width: 100%;
+    height: 150px;
+   
+   
+  }
+  .iteam_cart:hover{
+    opacity: 0.5;
+    
+
+  }
+  .show_cart a{
+    color:white;
+
+  }
+  .show_cart .view_cart_detail{
+    display: inline-block;
+    padding: 10px 5px;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    
+
+    
+  }
+  .show_cart .view_cart_detail:hover{
+  background-color: #97c93d;
+ 
+  }
+  .iteam_cart p{
+    text-overflow: ellipsis;
+    width: 100%;
+    height: 20px;
+    overflow: hidden;
+    display: -webkit-box; 
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    font-size: 14px;
+
+  }
+  .iteam_cart img{
+    width: 50%;
+  }
+  .tippy-content{
+    background-color: #ee4d2d;
+  }
     #oder{
         transition: linear 1s;
         background-color: #E4002B;cursor: pointer;font-size: 20px;color: white;padding: 0 20px;margin: 10px 0;border-radius: 35px;width: 400px;
@@ -159,6 +220,7 @@ if (isset($_POST["submit"])) {
         font-size: 20px;
         border: none;
         border-bottom: 2px solid lavender;
+        text-align: center;
     }
 
     .tron {
@@ -213,58 +275,7 @@ if (isset($_POST["submit"])) {
 
 <body>
     <div class="container">
-        <header style="background-color: #131921;">
-            <div class="left">
-                <div class="logo" style="text-align: center;">
-                    <img height="60px" src="../src/image/tech.png" alt="">
-                    <h4 style="color: lightblue; font-weight: 600; font-size: 20px;">HIGH-TECH</h4>
-                </div>
-
-            </div>
-            <div class="right">
-                <form action="" style="background-color: white;border-radius: 7px">
-                    <input type="text" placeholder="Tìm kiếm sản phẩm..." style="width: 900px;background-color: white;">
-                    <button><i style="font-size: 20px;border-radius: 0 7px 7px 0;background-color: rgba(243, 168, 71, 1);height: 40px; padding:10px;text-align: center; " class="fa fa-search"></i></button>
-                </form>
-                <div class="icon" style="display: flex;align-items: center;color: white;">
-                    <i class="fas fa-heart"></i>
-                    <a href="./view/list_bill.php"><i style="margin: 0 20px;" class="fas fa-clipboard-list"></i></a>
-
-                    <a id="show_cart" style="display: flex; margin-right: 30px;text-decoration: none;" href="./view/view_cart.php?id="> <i id="count" style="margin-right: 30px;color: lavender;" class="fas fa-shopping-bag"></i>
-
-                        <p style="font-size: 14px;background-color: white;border-radius: 100%; height: 20px; width: 20px;text-align: center; margin-left: -40px;color:red; font-weight: 600;">
-                            <?php if (!empty($_SESSION["cart"])) {
-                                echo $so_luong;
-                            } else {
-                                echo "0";
-                            } ?>
-                        </p>
-
-                    </a>
-
-                    <?php if (empty($_SESSION["id"])) { ?>
-                        <i class="fas fa-user"></i>
-                    <?php } else { ?>
-                        <img height="35px" style="border-radius: 50%;" src="<?php echo $_SESSION["avatar"] ?>" alt="">
-                    <?php } ?>
-
-                </div>
-            </div>
-        </header>
-        <!-- <img width="100%" src="https://cdn.watchstore.vn/uploads/productBanners/5pkXymn.jpg" alt=""> -->
-
-        <div class="menu" style="background-color: #232f3e;padding: 10px;margin-left: 0px;display: flex;justify-content: space-between;">
-            <ul>
-                <li><a href="./index.php"><i class="fa fa-home-lg-alt"></i> Trang chủ</a></li>
-                <li><a href="">Sản phẩm</a></li>
-                <li><a href="">Tin tức</a></li>
-                <li><a href="">Giới thiệu</a></li>
-
-            </ul>
-            <font>
-                <marquee direction="left" style="background:orange">Voucher khuyến mãi </marquee>
-            </font>
-        </div>
+        <?php include "./public/header.php" ?>
         <div class="khoi" style="display: flex;align-items: center;margin-left: 300px; margin-top: 30px;">
             <div class="coy">
                 <div class="text">
@@ -283,11 +294,9 @@ if (isset($_POST["submit"])) {
                     <p style="margin-left: -50px;">Địa chỉ nhận hàng</p>
                 </div>
                 <div class="center">
-                    <?php if (empty($tien)) { ?>
+                  
                         <div class="thanh" style="background-color: lavender;">
-                        <?php } else { ?>
-                            <div class="thanh" style="background-color: rgb(0, 182, 240);">
-                            <?php } ?>
+                  
                             <div class="tron" style="margin-left: -10px;">
                                 <p>2</p>
                             </div>
@@ -340,8 +349,9 @@ if (isset($_POST["submit"])) {
                         <span id="err"><?php echo $adressErr ?></span> <br>
                         <label for="">Lời nhắn:</label> <br>
                         <input name="note" type="text" placeholder="Lưu ý cho người bán..." value="<?php if (!empty($_SESSION["note"])) {
-                                                                                                        echo $_SESSION["note"];
+                                                                                                          echo $_SESSION["note"];
                                                                                                     } ?>"> <br>
+                        <?php if(!empty($cart)){ ?>
                         <label for="">Chọn hình thức thanh toán:</label> <br>
                         <button id="oder" onclick="return confirm('Bạn chắc chứ')"  type="submit" name="submit">Nhận hàng rồi thanh toán</button>
 
@@ -355,7 +365,7 @@ if (isset($_POST["submit"])) {
                             <button id="oder2"  type="submit" name="vnpay">
                                 <img height="40px" style="margin-right: 10px;" src="https://play-lh.googleusercontent.com/DvCn_h3AdLNNDcv3ftqTqP83gw6h65GMEPg3x6u788wB3F3ENNFcHgrHcWJNOPy4epg" alt=""> Thanh toán bằng VNPAY
                             </button>
-
+                       <?php } ?>
                        
                     
 
@@ -364,11 +374,12 @@ if (isset($_POST["submit"])) {
                     </form>
 
                 </div>
-                <div class="cart" style="margin-left: 50px;width: 55%;">
+                <div class="cart" style="margin-left: 50px;width: 60%;">
+                <?php if(!empty($cart)){ ?>
                     <table border="1" style="border-collapse: collapse;">
                         <thead>
                             <tr style="background-color: rgb(194, 225, 255);">
-                                <th>Sản phẩm</th>
+                                <th style="width: 460px;">Sản phẩm</th>
                                 <th>Đơn giá</th>
                                 <th>Số lượng</th>
                                 <th>Thành tiền</th>
@@ -380,7 +391,7 @@ if (isset($_POST["submit"])) {
                             <?php foreach ($cart as $id => $product) : ?>
                                 <tr>
                                     <td style="width: ;display: flex;align-items: center;"><img width="20%" style="margin-right: 10px;" src="../src/image/<?php echo $product["images"] ?>">
-                                        <p style="color: red;"><?php echo $product["color"] ?></p>
+                                        <p style="color: red;margin-right: 10px;">(<?php echo $product["color"] ?>)</p>
                                         <?php echo $product["productName"] ?>
                                     </td>
 
@@ -417,8 +428,8 @@ if (isset($_POST["submit"])) {
                         $vouchers = getAll($query);
                         ?>
 
-                        <select name="voucher" id="voucher" oninput="return sale()" style="border-radius: 5px;">
-                            <option value="" hidden>Mã giảm giá</option>
+                        <select name="voucher" id="voucher" oninput="return sale()" style="border-radius: 4px;">
+                            <option value="" hidden>Chọn voucher</option>
 
                             <?php foreach ($vouchers as $value) : ?>
                                 <option id="option" value="<?php echo $value["sale"] ?>">Giảm: <?php if ($count_money > $value["condition_V"]) {
@@ -491,22 +502,20 @@ if (isset($_POST["submit"])) {
                                                                                                                             echo $tong_tien2; ?>₫
 
 
-
+                       
                         </p>
                     </h2>
+                    <?php }else{ ?>
+                        <div class="err" style="text-align: center;">
+                         <img height="200px" src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/cart/9bdd8040b334d31946f49e36beaf32db.png" alt="">
+                         <h3>Giỏ hàng của bạn trống</h3>
+                         <a href="../product.php" style="background-color: #ee4d2d;color: #fff;padding: 10px 20px;">Mua ngay</a>
+                         </div>
+                        <?php } ?>
                 </div>
             </main>
 
-            <footer>
-                <?php
-                if (!empty($tien)) {
-                    echo '<script>
-                var input_check = document.querySelector("#dialog2");
-                input_check.checked =true;
-            </script>';
-                }
-                ?>
-            </footer>
+           <?php include "./public/footer.php" ?>
 
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -544,6 +553,51 @@ if (isset($_POST["submit"])) {
         }
 
     }
+    tippy('#user_hover', {
+        content: '<a id="logout" href="../controller/log_out.php">Đăng xuất</a> <br> <a id="ql_tk" href="./account.php">Quản lý tài khoản</a> ',
+        allowHTML: true, 
+        placement: 'bottom-start',
+        delay: [0, 1000],
+        duration: [0, 1000],
+        interactive: true,
+        //  theme: 'light',
+        
+     
+       
+      });
+    
+     tippy('#show_cart', {
+        arrow:false,
+        content: `<?php
+        $index=0;
+          ?>
+              <div class="show_cart"> 
+             <?php foreach($cart as $id => $product):?> 
+
+
+              <div class="iteam_cart"> 
+              <a  href="../detail.php?id=<?php echo $product["id"] ?>">
+             <p><?php echo $product["productName"] ?></p>
+             <div class="typpy_colum">
+             <img src="../src/image/<?php echo $product["images"] ?>" alt="">
+             <div class="show_type">
+            <p><?php echo $product["color"] ?> X <?php echo $product["quantity"] ?></p>
+            <p><?php echo $product["productPrice"] ?>₫</p>
+             </div>
+             </div>
+             </div>
+             </a>
+             
+             <?php endforeach ?>
+             <a class="view_cart_detail" href="./view_cart.php?id=">Xem chi tiết</a>
+             </div>
+         `,
+        allowHTML: true, 
+        placement: 'bottom',
+        delay: [0, 1000],
+        duration: [0, 1000],
+        interactive: true,
+      });
 </script>
 
 </html>
