@@ -16,7 +16,7 @@
         </form>
         <div class="icon" style="display: flex;align-items: center;color: white;">
          <a href="./favorite_product.php" style="color:white"> <i class="fas fa-heart"></i></a>
-          <a href="./list-bill.php"><i style="margin: 0 20px;" class="fas fa-clipboard-list"></i></a>
+          <a href="./list-bill.php"><i style="margin: 0 20px;color:white;" class="fas fa-clipboard-list"></i></a>
 
           <a id="show_cart" style="display: flex; margin-right: 30px;text-decoration: none;" href="./view_cart.php?id="> <i id="count" style="margin-right: 30px;color: lavender;" class="fas fa-shopping-bag"></i>
           
@@ -46,7 +46,7 @@
             <li><a href="../index.php"><i class="fa fa-home-lg-alt"></i> Trang chủ</a></li>
             <li><a href="../product.php">Sản phẩm</a></li>
             <li><a href="./news.php">Tin tức</a></li>
-            <li><a href="./gioi_thieu.php">Giới thiệu</a></li>
+            <li><a href="#">Giới thiệu</a></li>
 
           </ul>
          

@@ -1,5 +1,8 @@
 <?php 
  session_start();
+ $total = $_GET["id"];
+ $_SESSION["total_update"] = $total;
+ 
 ?>
 
 <!DOCTYPE html>
@@ -43,10 +46,11 @@
                         <!-- $_GET['vnp_TxnRef'] -->
                         <input class="form-control" id="order_id" name="order_id" type="text"  value="<?php echo date("YmdHis") ?>"/>
                     </div>
+                 
                     <div class="form-group">
                         <label for="amount">Số tiền</label>
                         <input class="form-control" id="amount"
-                               name="amount" type="number" value="<?php echo $_SESSION["total"] ?>"/>
+                               name="amount" type="number" value="<?php echo $total ?>"/>
                     </div>
                     <div class="form-group">
                         <label for="order_desc">Nội dung thanh toán</label>
@@ -232,7 +236,7 @@
             </footer>
         </div>  
        
-         
+         <h1>hello</h1>
 
 
     </body>
