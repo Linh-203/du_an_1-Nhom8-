@@ -181,7 +181,7 @@ if(isset($_POST["submit"])){
             </div>
             <div class="menu_ac">
             <a href="./account.php" style="background-color: #ee4d2d; width: 83%;color:white" ><i class="fa-regular fa-id-badge" style="margin-right: 5px;font-size: 20px;"></i> Tài khoản của tôi</a> <br>
-            <a href="./change_pass.php" style=" "><i style="font-size: 20px;margin-right: 5px;" class="fab fa-expeditedssl" style="margin-right: 3px;"></i> Đổi mật khẩu</a> <br>
+            <a href="./change_pass.php"><i style="font-size: 20px;margin-right: 5px;" class="fab fa-expeditedssl" style="margin-right: 3px;"></i> Đổi mật khẩu</a> <br>
             <a href="./list-bill.php"><i class="fas fa-money-bill-alt" style="font-size: 20px; margin-right: 5px;"></i> Đơn mua</a> <br>
             <a href="./voucher.php"> <i class="fas fa-tags" style="font-size: 20px;margin-right: 5px;"></i> Ưu đãi cho bạn</a> <br>
             <a href="./adress.php"><i style="font-size: 20px;margin-right: 5px;" class="fa-solid fa-map-location-dot"></i> Địa chỉ</a> <br>
@@ -199,7 +199,7 @@ if(isset($_POST["submit"])){
                 <?php if(!empty($alert)){ ?>
             <div class="alert" style="background-color: lightgreen;color: green;">
 				<span style="font-weight: 500; font-size: 18px;"><img style="margin-right: 8px;" height="40px" src="../src/image/dung-removebg-preview.png" alt=""> <?php echo $alert ?></span>
-				<button style="" class="close">&times;</button>
+				<button  class="close">&times;</button>
 				</div>
                 <?php } ?>
   <div class="form-group">

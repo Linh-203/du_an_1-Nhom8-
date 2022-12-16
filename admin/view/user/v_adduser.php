@@ -37,13 +37,13 @@
                         <input type="text" placeholder="Nhập số điện thoại" name='phone'>
                         <?php
                         if (!empty($errors['phone']['require'])) {
-                            echo '<span style="color:red">' . $errors['username']['require'] . '</span>';
+                            echo '<span style="color:red">' . $errors['phone']['require'] . '</span>';
                         }
                         ?>
                     </div>
                     <div class="form_group">
                         <label class='name-product' for="">Mật khẩu</label>
-                        <input type="text" placeholder="*****" name='pass'>
+                        <input type="password" placeholder="*****" name='pass'>
                         <?php
                         if (!empty($errors['pass']['require'])) {
                             echo '<span style="color:red">' . $errors['pass']['require'] . '</span>';

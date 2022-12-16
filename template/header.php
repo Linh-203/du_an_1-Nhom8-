@@ -43,7 +43,7 @@
             <li><a href="./index.php"><i class="fa fa-home-lg-alt"></i> Trang chủ</a></li>
             <li><a href="./product.php">Sản phẩm</a></li>
             <li><a href="./view/news.php">Tin tức</a></li>
-            <li><a href="../view/gioi_thieu.php">Giới thiệu</a></li>
+            <li><a href="#">Giới thiệu</a></li>
 
           </ul>
          

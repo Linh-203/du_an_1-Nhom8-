@@ -24,12 +24,16 @@ $id_person = $_SESSION["id"];
   
 
 if (isset($_POST["vnpay"])) {
+    
+  
     if (empty($_POST["adress"])) {
 
         $adressErr = "Không được bỏ trống";
     } else {
+        $total  = $_SESSION["total"] ;
         $_SESSION["adress"] = $_POST["adress"];
-        header("location:../vnpay_php");
+         header("location:../vnpay_php?id=$total");
+        
     }
 }
 
@@ -491,11 +495,7 @@ if (isset($_POST["submit"])) {
                             $_SESSION["total"] = $tong_tien2;
 
 
-                            // if ($index == 0) {
-                            //     echo "Mã ko trùng";
-                            //     $tong_tien = $total;
-
-                            // }
+                      
                         }
                     } else {
                         $tong_tien2 = $total;
@@ -578,7 +578,9 @@ if (isset($_POST["submit"])) {
     
      tippy('#show_cart', {
         arrow:false,
-        content: `<?php if(!empty($cart)){ ?>
+        content: `<?php
+        $index=0;
+          ?>
               <div class="show_cart"> 
              <?php foreach($cart as $id => $product):?> 
 
@@ -597,9 +599,8 @@ if (isset($_POST["submit"])) {
              </a>
              
              <?php endforeach ?>
-             <a class="view_cart_detail" href="../view/view_cart.php?id=">Xem chi tiết</a>
-             </div> 
-             <?php } ?>
+             <a class="view_cart_detail" href="./view_cart.php?id=">Xem chi tiết</a>
+             </div>
          `,
         allowHTML: true, 
         placement: 'bottom',

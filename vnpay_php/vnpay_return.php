@@ -98,7 +98,7 @@
                               $phone =  $_SESSION["phone"] ;
                               $username =  $_SESSION["username"] ;
                               $count_money2 =  $_SESSION["money"];
-                              $total2 =  $_SESSION["total"]; 
+                              $total2 =  $_SESSION["total_update"]; 
                               $id = $_SESSION["id"] ;
                               $pay = 2;       
                               $status =0;
