@@ -17,10 +17,10 @@ class m_order extends database {
         $this->setQuery($sql); 
         return $this->loadAllRows(array($id));   
     }
-    public function update_order($id,$status,$received_date){
+    public function update_order($id,$status,$received_date,$pay){
         $sql = "update oder set status = ?, received_date = ?, pay = ? where id = ? ";
         $this->setQuery($sql);
-        return $this->execute(array($status,$received_date,$id));
+        return $this->execute(array($status,$received_date,$pay,$id));
     }
 }
 ?>

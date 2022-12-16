@@ -9,8 +9,10 @@ if(empty($_SESSION["id"])){
         $act = $_GET['act'];
         if($act == 'add'){
             $voucher->add_voucher();
-        }elseif($act == "delete"){
-            $voucher->show_voucher();
+        }else if($act == "delete"){
+            $voucher->delete_voucher();
+        }else if($act == "update"){
+            $voucher ->update_voucher();
         }
     }else{
        

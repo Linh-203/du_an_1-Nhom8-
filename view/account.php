@@ -2,7 +2,7 @@
 <?php
 include "../model/connect.php";
 session_start();
-
+ 
 $err = "";
 // $color = $_SESSION["color"];
  if(!empty($_SESSION["cart"])){
@@ -10,16 +10,27 @@ $err = "";
  }
 if (!empty($_SESSION["id"])) {
   $id_person = $_SESSION["id"];
+}else{
+  header("location:../login");
 }
 if(!empty($_SESSION["cart"])){
   $cart = $_SESSION["cart"];
   $so_luong = count($cart);
 }
   $alert ="";
-  $nameErr = $phoneErr = $emailErr ="";
+  $nameErr = $phoneErr = $emailErr =$codeErr="";
  
  
 if(isset($_POST["submit"])){
+ 
+   
+    $_SESSION["username"] = $_POST["username"];
+    $name = $_SESSION["username"];
+    $_SESSION["email"] = $_POST["email"];
+    $email = $_SESSION["email"];
+    $_SESSION["phone"] = $_POST["phone"];
+    $phone = $_SESSION["phone"];
+  
     if(empty($_POST["username"])){
         $nameErr=" Tên đăng nhập không được bỏ trống !";
       }
@@ -29,29 +40,28 @@ if(isset($_POST["submit"])){
       if(empty($_POST["phone"])){
         $phoneErr="Số điện thoại không được bỏ trống !";
       }
-    if(!empty($_POST["username"]) && !empty($_POST["email"]) && !empty($_POST["phone"])){
-
-    $_SESSION["username"] = $_POST["username"];
-    $name = $_SESSION["username"];
-   
-    $_SESSION["email"] = $_POST["email"];
-    $email = $_SESSION["email"];
-    $_SESSION["phone"] = $_POST["phone"];
-    $phone = $_SESSION["phone"];
-
-    if(empty($_FILES["avatar"]["name"])){
-      $avatar = $_SESSION["avatar"] ;
-    }else{
-        $_SESSION["avatar"] = $_FILES["avatar"]["name"];
-        $avatar = $_SESSION["avatar"];
-    }
+      if(empty($_FILES["avatar"]["name"])){
+        $avatar = $_SESSION["avatar"] ;
+      }else{
+          $_SESSION["avatar"] = $_FILES["avatar"]["name"];
+          $avatar = $_SESSION["avatar"];
+      }
+    if(!empty($_POST["username"]) && !empty($_POST["email"]) && !empty($_POST["phone"]) ){
+     
+     
+          $query = "UPDATE users SET username = '$name', avatar ='$avatar', email = '$email', phone = '$phone'
+          where id like n'$id_person' ";
+         connect($query);
+         move_uploaded_file($_FILES["avatar"]["tmp_name"],"../src/image/".$_FILES["avatar"]["name"]);
+         $alert = "Lưu thành công";
+        
+      }else{
     $query = "UPDATE users SET username = '$name', avatar ='$avatar', email = '$email', phone = '$phone'
      where id like n'$id_person' ";
     connect($query);
     move_uploaded_file($_FILES["avatar"]["tmp_name"],"../src/image/".$_FILES["avatar"]["name"]);
     $alert = "Lưu thành công";
 }}
-
 
 ?>
 <!DOCTYPE html>
@@ -179,7 +189,7 @@ if(isset($_POST["submit"])){
 
             </div>
             </aside>
-            <article style="margin-top: 50px; width: 70%;background-color: white;padding-left: 50px;">
+            <article style="margin-top: 50px; width: 70%;background-color: white;padding-left: 50px;padding-top: 30px;">
           <h2 style="border-left: 5px solid #ee4d2d;padding-left: 10px;display: inline;">  Hồ sơ của tôi</h2>
  
  <hr>
@@ -195,6 +205,8 @@ if(isset($_POST["submit"])){
   <div class="form-group">
     <label for="exampleInputEmail1">Mã đăng nhập</label>
     <input id="code" disabled type="text" name="code" class="form-control" value="<?php echo $_SESSION["id"] ?>">
+    <span style="color:red"><?php echo $codeErr?></span>
+
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Tên đăng nhập</label>
@@ -256,15 +268,13 @@ if(isset($_POST["submit"])){
     
      tippy('#show_cart', {
         arrow:false,
-        content: `<?php
-        $index=0;
-          ?>
+        content: `<?php if(!empty($cart)){ ?>
               <div class="show_cart"> 
              <?php foreach($cart as $id => $product):?> 
 
 
               <div class="iteam_cart"> 
-              <a  href="./detail.php?id=<?php echo $product["id"] ?>">
+              <a  href="../detail.php?id=<?php echo $product["id"] ?>">
              <p><?php echo $product["productName"] ?></p>
              <div class="typpy_colum">
              <img src="../src/image/<?php echo $product["images"] ?>" alt="">
@@ -277,8 +287,9 @@ if(isset($_POST["submit"])){
              </a>
              
              <?php endforeach ?>
-             <a class="view_cart_detail" href="./view_cart.php?id=">Xem chi tiết</a>
-             </div>
+             <a class="view_cart_detail" href="../view/view_cart.php?id=">Xem chi tiết</a>
+             </div> 
+             <?php } ?>
          `,
         allowHTML: true, 
         placement: 'bottom',

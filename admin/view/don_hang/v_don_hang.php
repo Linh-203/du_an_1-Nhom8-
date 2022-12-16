@@ -42,9 +42,7 @@
                     <button class='btn_edit'>
                         <a href="don_hang.php?act=detail&id=<?= $value->id?>" style="color: white">Detail</a>
                     </button>
-                    <button class='btn_delete'>
-                        <a style="color: white;" onclick="return confirm('Bạn có chắc muốn xóa ??')" class='btn_delete' href="don_hang.php?act=delete&id=<?= $value->id?>">Delete</a>
-                    </button>
+                    
                     
                 </td>
             </tr>

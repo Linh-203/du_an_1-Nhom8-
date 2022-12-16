@@ -21,6 +21,22 @@ include "../model/connect.php";
 <html lang="en">
 <?php include "./public/head.php" ?>
 <style>
+  #b_huy{
+    border: 1px solid #97c93d;
+    transition: 1s;
+    background-color: #97c93d;font-size: 20px;padding: 0 15px; border-radius: 5px;color: white;margin-top: 20px;
+  }
+  #b_huy:hover{
+    opacity: 0.5;
+  }
+  #huy{
+    transition: 1s;
+    border: 1px solid #ee4d2d;
+    background-color: #ee4d2d;padding: 0 15px;font-size: 20px; border-radius: 5px;color: white;margin-top: 20px;
+  }
+  #huy:hover{
+    opacity: 0.5;
+  }
     #img img{
         width: 100%;
     }
@@ -176,9 +192,9 @@ include "../model/connect.php";
          ?>
           <form action="../controller/update_huy.php?id=<?php echo $id_oder ?>" method="post">
             <?php if($oder["status"]==0 || $oder["status"]==1){ ?>
-                <button name="huy" style="background-color: #ee4d2d;padding: 0 15px;font-size: 20px; border-radius: 5px;color: white;margin-top: 20px;">Hủy</button>
+                <button name="huy" id="huy" >Hủy</button>
                 <?php }else if($oder["status"]==4){ ?>
-                     <button name="b_huy" style="background-color: green;font-size: 20px;padding: 0 15px; border-radius: 5px;color: white;margin-top: 20px;">Bỏ Hủy</button>
+                     <button name="b_huy" id="b_huy" >Bỏ Hủy</button>
              <?php   }else{ ?>
                 <button name="huy" disabled style="opacity: 0.4;;background-color: #ee4d2d;padding: 0 15px;font-size: 20px; border-radius: 5px;color: white;margin-top: 20px;">Hủy</button>
 
@@ -207,15 +223,13 @@ include "../model/connect.php";
       });
       tippy('#show_cart', {
         arrow:false,
-        content: `<?php
-        $index=0;
-          ?>
+        content: `<?php if(!empty($cart)){ ?>
               <div class="show_cart"> 
              <?php foreach($cart as $id => $product):?> 
 
 
               <div class="iteam_cart"> 
-              <a  href="./detail.php?id=<?php echo $product["id"] ?>">
+              <a  href="../detail.php?id=<?php echo $product["id"] ?>">
              <p><?php echo $product["productName"] ?></p>
              <div class="typpy_colum">
              <img src="../src/image/<?php echo $product["images"] ?>" alt="">
@@ -228,8 +242,9 @@ include "../model/connect.php";
              </a>
              
              <?php endforeach ?>
-             <a class="view_cart_detail" href="./view/view_cart.php?id=">Xem chi tiết</a>
-             </div>
+             <a class="view_cart_detail" href="../view/view_cart.php?id=">Xem chi tiết</a>
+             </div> 
+             <?php } ?>
          `,
         allowHTML: true, 
         placement: 'bottom',

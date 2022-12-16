@@ -59,6 +59,9 @@
 <div class="title_act" style="text-align: center;margin-top: 50px;margin-bottom:30px; background:#009CFF ; height: 60px">
     <h3 style="color: white; padding-top: 15px">ORDER - <?php echo strtoupper($_GET['act'])?></h3>
 </div>
+<?php if(!empty($_GET["alert"])){
+   echo  $alert = $_GET["alert"];
+} ?>
 <div class="about__component">
     <div class="container" style="background-color: white;">
         <main style="display: flex;padding: 40px 20px">
@@ -113,6 +116,17 @@
                         <option value="4">Đã hủy</option>
 
                     </select>
+    
+                    <select name="pay" id="">
+                        <option value="1" hidden><?php if($order->pay == 1){ ?>
+                            Chưa thanh toán 
+                    <?php    }else if($order->pay == 2){ ?>
+                        Đã thanh toán 
+                      <?php } ?>
+                            </option>
+                        <option value="1">Chưa thanh toán</option>
+                        <option value="2">Đã thanh toán</option>
+                    </select> <br>
                     <button class='btn_edit' style="color: white" name="btn-submit">Update
                     </button>
                 </form>
@@ -144,7 +158,7 @@
 
                     </tbody>
                 </table>
-                <p>Phí vận chuyển:</p>
+                
                 <h3 style="display: flex;">Tổng thanh toán:  <p style="color: red;margin-left: 10px;"> <?php echo $order->total ?>₫</p></h3>
 
             </div>

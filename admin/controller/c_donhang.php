@@ -22,9 +22,12 @@ class c_donhang {
                 if (empty($errors)) {
                     $status = $_POST['status'];
                     $received_date = $_POST['date'];
-                    $result = $m_order->update_order($id,$status,$received_date,2);
+                    $pay = $_POST["pay"];
+                    $result = $m_order->update_order($id,$status,$received_date,$pay);
                     if ($result) {
-                        echo "<script>alert('Update Thành Công')</script>";
+                
+                        $alert = "Cập nhật thành công ";
+                        header("location:./don_hang.php?act=detail&id=$id&alert=$alert");
                         
                     } else {
                         echo "<script>alert('Update không thành công')</script>";
