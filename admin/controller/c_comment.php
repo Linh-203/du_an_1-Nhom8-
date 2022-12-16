@@ -16,6 +16,16 @@ class c_comment {
         
         }
     }
+    public function detail_comment(){
+        $m_comment = new m_comment();
+        if(isset($_GET['id'])){
+            $id = $_GET['id'];
+            $detail_comments = $m_comment->detail_comment($id);
+        
+        }
+        $view = "view/comment/v_detail_comment.php";
+        include ("template/front_end/layout.php");
+    }
 }
 
 ?>

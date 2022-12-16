@@ -1,4 +1,6 @@
 <?php 
+session_start();
+ob_start();
 include "../model/connect.php";
 $query ="select * from tintuc where idcategory = 3";
 $tintuc = getAll($query);
@@ -6,24 +8,499 @@ $tintuc = getAll($query);
 $query1 ="select * from tintuc where idcategory = 1";
 $tintuc1 = getAll($query1);
 
+if (!empty($_SESSION["id"])) {
+    $id_person = $_SESSION["id"];
+  }
+  if (!empty($_SESSION["cart"])) {
+    $cart = $_SESSION["cart"];
+    $so_luong = count($_SESSION["cart"]);
+  }
 
-session_start();
 
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php include "./public/head.php" ?>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 
-    <link rel="stylesheet" href="../src/css/new.css">
- 
-    <script src="https://kit.fontawesome.com/d38ff20960.js" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/969bec5078.js" crossorigin="anonymous"></script>
-</head>
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+   
+    background-color: rgba(36, 43, 62, 1);
+
+    padding: 10px 25px;
+}
+
+.left,
+.right {
+    display: flex;
+    align-items: center;
+
+}
+
+.right form {
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-radius: 7px;
+    margin-right: 30px;
+    background-color: lavender;
+    color: black;
+    border: none;
+
+
+}
+
+.right input {
+    width: 400px;
+    margin-left: 10px;
+    font-size: 18px;
+
+}
+
+.right input,
+button {
+    border: none;
+    outline: none;
+    background: none;
+    height: 40px;
+}
+
+.icon {
+    font-size: 25px;
+
+}
+
+
+
+.container {
+    margin: 0 auto;
+    width: 1400px;
+
+}
+
+h1 {
+    color: rgb(85, 85, 85);
+}
+
+.container a {
+    text-decoration: none;
+    color: black;
+}
+
+.menu {
+    margin-bottom: 2%;
+    background-color: #232f3e;
+    padding: 10px;
+    margin-left: 0px;
+    display: flex;
+    justify-content: space-between;
+    height: 43.2px;
+
+}
+
+.menu ul li {
+    display: inline-block;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+    padding: 0 16px;
+    padding-left: 200px;
+}
+
+.menu a:hover {
+
+    color: aqua;
+}
+
+.menu-bottom {
+    margin-top: 1%;
+    margin-bottom: 2%;
+    text-align: center;
+    border-radius: 7px;
+}
+
+.menu-bottom ul li {
+    display: inline-block;
+
+
+}
+
+.menu-bottom ul li a {
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 40px;
+}
+
+.menu-bottom a:hover {
+    text-decoration: underline;
+    color: aqua;
+}
+
+.hang1 {
+    display: flex;
+    grid-gap: 30px;
+}
+
+.trai1 {
+    display: flex;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 20px;
+
+}
+
+.phai1 {
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 20px;
+
+}
+
+.cot1 {
+    display: flex;
+    grid-gap: 10px;
+
+}
+
+.cot2 {
+    display: flex;
+    grid-gap: 10px;
+    padding-top: 7px;
+}
+
+.cot3 {
+    display: flex;
+    grid-gap: 10px;
+    padding-top: 7px;
+}
+
+.cot4 {
+    display: flex;
+    grid-gap: 10px;
+    padding-top: 7px;
+}
+
+.trai1 {
+    grid-gap: 20px;
+}
+
+.dong {
+    padding: 10px 0;
+}
+
+hr {
+    margin-top: 15px;
+}
+
+.trai1 p {
+    color: gray;
+}
+
+.khung2 {
+    display: flex;
+    margin-top: 30px;
+    grid-gap: 30px;
+}
+
+.doc {
+    display: flex;
+    grid-gap: 10px;
+    padding-top: 20px;
+}
+
+.doc2 {
+    display: flex;
+    margin-top: 15px;
+    grid-gap: 10px;
+}
+
+.trai2 {
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 20px;
+
+}
+
+.phai2 {
+    border: 1px solid gray;
+    width: 328px;
+    border-radius: 5px;
+    padding: 20px;
+
+}
+
+.trai2 h3 {
+    font-size: 25px;
+    padding-bottom: 10px;
+}
+
+.phai3 {
+    border: 1px solid gray;
+    width: 328px;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    /* box-shadow: 1px 1px 2px 2px rgb(198, 198, 198); */
+}
+
+.phai3 img {
+    width: 280px;
+    height: 150px;
+}
+
+.anh1 {
+    padding-top: 20px;
+}
+
+.doc iframe {
+    width: 100%;
+}
+
+.phai3 h4 {
+    text-align: center;
+    padding-top: 10px;
+}
+
+
+
+
+
+/* background-color: rgb(174, 207, 207);   */
+
+.cuoi {
+    background-color: rgb(46, 127, 127);
+    padding: 45px;
+    display: flex;
+    max-width: 1450px;
+    margin: 0 auto;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+.mot img {
+    width: 110px;
+    height: 50px;
+    border-radius: 0 15px;
+}
+
+.mot {
+    margin-left: 45px;
+}
+
+.mot h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.mot h3 {
+    padding-top: 20px;
+}
+
+.icon .fa-regular {
+    margin-left: 20px;
+    margin-top: 30px;
+}
+
+.hai {
+    margin: 0 35px;
+}
+
+.hai h4 {
+    margin-top: 20px;
+
+}
+
+.hai h4 li {
+    margin-top: 10px;
+}
+
+.ba {
+    margin: 0 35px;
+}
+
+.ba h4 {
+    margin-top: 20px;
+
+}
+
+.ba h4 li {
+    margin-top: 10px;
+}
+
+.bon {
+    margin: 0 35px;
+}
+
+.bon h4 {
+    margin-top: 20px;
+
+}
+
+.bon h4 li {
+    margin-top: 10px;
+}
+
+.nam hr {
+    margin-top: 30px;
+}
+
+.nam {
+    margin-left: 25px;
+}
+
+.nam input {
+    border: none;
+    margin-left: 15px;
+    padding-top: 13px;
+    width: 200px;
+    outline: none;
+
+}
+
+#xuong {
+    padding: 20px 0;
+}
+
+#dich {
+    padding-left: 45px;
+}
+
+.nam h3 i {
+    padding-left: 7px;
+    font-size: 25px;
+}
+
+#kinh {
+    color: black;
+}
+
+.tkiem {
+    border: 2px solid rgb(8, 114, 133);
+    width: 250px;
+    height: 40px;
+    background-color: white;
+    border: none;
+    border-radius: 20px;
+    margin-top: 15px;
+}
+
+.footer {
+    display: flex;
+    width: 1410px;
+    grid-gap: 10px;
+    height: 250px;
+    text-align: center;
+    align-items: center;
+    background-color: #131921;
+    margin-bottom: 1%;
+    margin-top: 1%;
+    padding: 20px;
+    color: white;
+    border-radius: 5px;
+    margin-left: 3.9%;
+}
+
+.footer h4 {
+    padding: 10px 0;
+}
+
+.footer p {
+    padding: 2px;
+}
+
+.icon-ft {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3%;
+}
+
+.icon-phone {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 26%;
+
+}
+
+.icon-mail {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 30%;
+}
+
+.connect {
+    display: flex;
+    grid-gap: 20px;
+    align-items: center;
+    padding: 30px;
+}
+
+.ft-1 {
+    width: 380px;
+}
+
+.ft-2 {
+    width: 200px;
+}
+
+.ft-3 {
+    width: 250px;
+}
+
+.ft-4 {
+    width: 250px;
+}
+
+.ft-5 {
+    width: 400px;
+}
+
+.ft-5 h3 {
+    margin-top: -6%;
+    padding-bottom: 1%;
+}
+
+.ft-nhapemail {
+    display: flex;
+    padding: 10px;
+}
+
+.ft-nhapemail input {
+    width: 220px;
+    height: 30px;
+    border-radius: 7px;
+    border: none;
+    padding: 10px;
+    margin-left: 18px;
+}
+
+.ft-nhapemail button {
+    background-color: white;
+    color: black;
+    width: 60px;
+    height: 30px;
+    border-radius: 7px;
+    border: none;
+    margin-left: 10%;
+    padding: 5px;
+}
+</style>
 <body>
 
 <div class="container">
@@ -282,4 +759,51 @@ session_start();
 
 </div>
 </body>
+<script>
+  tippy('#user_hover', {
+    content: '<a id="logout" href="./controller/log_out.php">Đăng xuất</a> <br> <a id="ql_tk" href="./view/account.php">Quản lý tài khoản</a> ',
+    allowHTML: true,
+    placement: 'bottom-start',
+    delay: [0, 1000],
+    duration: [0, 1000],
+    interactive: true,
+    //  theme: 'light',
+
+
+
+  });
+</script>
+<script>
+  tippy('#show_cart', {
+    arrow: false,
+    content: `<?php if(!empty($cart)){ ?>
+              <div class="show_cart"> 
+             <?php foreach($cart as $id => $product):?> 
+
+
+              <div class="iteam_cart"> 
+              <a  href="../detail.php?id=<?php echo $product["id"] ?>">
+             <p><?php echo $product["productName"] ?></p>
+             <div class="typpy_colum">
+             <img src="../src/image/<?php echo $product["images"] ?>" alt="">
+             <div class="show_type">
+            <p><?php echo $product["color"] ?> X <?php echo $product["quantity"] ?></p>
+            <p><?php echo $product["productPrice"] ?>₫</p>
+             </div>
+             </div>
+             </div>
+             </a>
+             
+             <?php endforeach ?>
+             <a class="view_cart_detail" href="../view/view_cart.php?id=">Xem chi tiết</a>
+             </div> 
+             <?php } ?>
+         `,
+    allowHTML: true,
+    placement: 'bottom',
+    delay: [0, 1000],
+    duration: [0, 1000],
+    interactive: true,
+  });
+</script>
 </html>

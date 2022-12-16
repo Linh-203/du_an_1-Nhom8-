@@ -85,6 +85,16 @@ $err = "";
 
 <?php include "./public/head.php" ?>
 <style>
+  #add_voucher{
+    background-color: #ee4d2d;color: white;padding: 5px 20px;border-radius: 5px;margin-left: 175px;
+    border: 1px solid #ee4d2d;
+  }
+  #add_voucher:hover{
+    transition: 1s;
+     background-color: white;
+     color: #ee4d2d;
+     border: 1px solid #ee4d2d;
+  }
   .typpy_colum{
     display: flex;
     align-items: center;
@@ -252,7 +262,7 @@ $err = "";
                 
                 ?>
                 <div class="colum_voucher" style="display: flex;box-shadow: 0 0 20px lightgrey;">
-                    <img style="height: 150px;" src="<?php echo $value["img"] ?>" alt="">
+                    <img style="height: 150px;" src="../src/image/<?php echo $value["img"] ?>" alt="">
                 
                 <div class="item" style="padding-left: 30px;padding-top: 20px;width: 100%;">
                 <p style="font-size: 20px; font-weight: 500; color:#ee4d2d;">Giảm <?php echo $value["sale"] ?>%</p> 
@@ -261,7 +271,7 @@ $err = "";
     <p> Có hiệu lực sau: 11 giờ</p>
     
     <form action="../controller/save_add_voucher.php?code=<?php echo $value["code"] ?>&sale=<?php echo $value["sale"] ?>" method="post">
-    <button name="btn-add" type="submit" style="background-color: #ee4d2d;color: white;padding: 5px 20px;border-radius: 5px;margin-left: 175px;">Lưu</button>
+    <button name="btn-add" type="submit" id="add_voucher" >Lưu</button>
     </form>
                 </div>
 
@@ -305,15 +315,13 @@ $err = "";
     
      tippy('#show_cart', {
         arrow:false,
-        content: `<?php
-        $index=0;
-          ?>
+        content: `<?php if(!empty($cart)){ ?>
               <div class="show_cart"> 
              <?php foreach($cart as $id => $product):?> 
 
 
               <div class="iteam_cart"> 
-              <a  href="./detail.php?id=<?php echo $product["id"] ?>">
+              <a  href="../detail.php?id=<?php echo $product["id"] ?>">
              <p><?php echo $product["productName"] ?></p>
              <div class="typpy_colum">
              <img src="../src/image/<?php echo $product["images"] ?>" alt="">
@@ -326,8 +334,9 @@ $err = "";
              </a>
              
              <?php endforeach ?>
-             <a class="view_cart_detail" href="./view/view_cart.php?id=">Xem chi tiết</a>
-             </div>
+             <a class="view_cart_detail" href="../view/view_cart.php?id=">Xem chi tiết</a>
+             </div> 
+             <?php } ?>
          `,
         allowHTML: true, 
         placement: 'bottom',

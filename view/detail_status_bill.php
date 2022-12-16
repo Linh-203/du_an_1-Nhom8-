@@ -209,7 +209,7 @@ tr{
 
             </div>
             </aside>
-            <article style="margin-top: 50px; width: 70%;background-color: white;padding: 0 50px;">
+            <article style="margin-top: 50px; width: 70%;background-color: white;padding: 0 50px;padding-top: 30px;">
              <h2 style="border-left: 5px solid #ee4d2d;display: inline;padding-left: 10px;">Đơn hàng của tôi</h2>
              <hr>
 
@@ -309,9 +309,7 @@ tr{
     
      tippy('#show_cart', {
         arrow:false,
-        content: `<?php
-        $index=0;
-          ?>
+        content: `<?php if(!empty($cart)){ ?>
               <div class="show_cart"> 
              <?php foreach($cart as $id => $product):?> 
 
@@ -330,8 +328,9 @@ tr{
              </a>
              
              <?php endforeach ?>
-             <a class="view_cart_detail" href="./view_cart.php?id=">Xem chi tiết</a>
-             </div>
+             <a class="view_cart_detail" href="../view/view_cart.php?id=">Xem chi tiết</a>
+             </div> 
+             <?php } ?>
          `,
         allowHTML: true, 
         placement: 'bottom',

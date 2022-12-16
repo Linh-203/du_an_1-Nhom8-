@@ -123,10 +123,11 @@
 					<em style="color:red"><?php echo $passErr ?></em>
 					
 					<div class="text-right p-t-8 p-b-31">
-						<a href="#">
+						<a href="../forgot_pass/">
 							Bạn quên mật khẩu ?
 						</a>
 					</div>
+					<span style="color: red;"><?php echo $Err ?></span>
 					
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">

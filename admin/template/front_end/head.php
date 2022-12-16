@@ -4,7 +4,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 

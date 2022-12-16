@@ -174,15 +174,18 @@ function drawChart() {
   $sumCart = count($thong_ke);
 
   foreach($thong_ke as $value){
-  // if($value["name"] = 1){
-  //   $status = "Chờ lấy hàng";
-  // }else if($value["name"] = 2){
-  //   $status = "Đang giao";
-  // }else if($value["name"] = 3){
-  //   $status = "Đã nhận hàng";
-  // }else if($value["name"] = 4){
-  //   $status = "Đã hủy";
-  // };
+    if($value["name"]==0){
+      $value["name"] = "Chờ xác nhận" ;
+    }else if($value["name"]==1){
+      $value["name"] = "Chờ lấy hàng" ;
+    }
+    else if($value["name"]==2){
+      $value["name"] = "Đang giao" ;
+    }else if($value["name"]==3){
+      $value["name"] = "Đã hoàn thành" ;
+    }else if($value["name"]==4){
+      $value["name"] = "Đã hủy" ;
+    }
    if($i == $sumCart) $coma =""; else $coma = ",";
    echo "['".$value["name"]."',".$value["So_luong"]."]".$coma;
    $i+=1;

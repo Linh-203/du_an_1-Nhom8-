@@ -24,92 +24,7 @@ if (!empty($_SESSION["cart"])) {
 <html lang="en">
 <?php include "./template/head.php" ?>
 <style>
-  a {
-    text-decoration: none;
-  }
 
-  #ql_tk,
-  #logout {
-    color: white;
-    font-weight: 500;
-    text-transform: uppercase;
-  }
-
-  #logout:hover,
-  #ql_tk:hover {
-    opacity: 0.5;
-  }
-
-  .typpy_colum {
-    display: flex;
-    align-items: center;
-
-
-  }
-
-  .show_type {
-    margin-left: 20px;
-  }
-
-  .show_cart {
-    width: 200px;
-
-  }
-
-  .iteam_cart {
-    width: 100%;
-    height: 150px;
-
-
-  }
-
-  .iteam_cart:hover {
-    opacity: 0.5;
-
-
-  }
-
-  .show_cart a {
-    color: white;
-
-  }
-
-  .show_cart .view_cart_detail {
-    display: inline-block;
-    padding: 10px 5px;
-    border: 1px solid white;
-    display: flex;
-    justify-content: center;
-
-
-
-  }
-
-  .show_cart .view_cart_detail:hover {
-    background-color: #97c93d;
-
-  }
-
-  .iteam_cart p {
-    text-overflow: ellipsis;
-    width: 100%;
-    height: 20px;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    font-size: 14px;
-
-  }
-
-  .iteam_cart img {
-    width: 50%;
-  }
-
-  .tippy-content {
-    background-color: #ee4d2d;
-    border-radius: 3px;
-  }
 </style>
 
 <body>
@@ -335,7 +250,7 @@ if (!empty($_SESSION["cart"])) {
 </script>
 <script>
   tippy('#user_hover', {
-    content: '<a id="logout" href="../controller/log_out.php">Đăng xuất</a> <br> <a id="ql_tk" href="./view/account.php">Quản lý tài khoản</a> ',
+    content: '<a id="logout" href="./controller/log_out.php">Đăng xuất</a> <br> <a id="ql_tk" href="./view/account.php">Quản lý tài khoản</a> ',
     allowHTML: true,
     placement: 'bottom-start',
     delay: [0, 1000],
@@ -353,6 +268,7 @@ if (!empty($_SESSION["cart"])) {
     content: `<?php
               $index = 0;
               ?>
+              <?php if(!empty($cart)){ ?>
               <div class="show_cart"> 
              <?php foreach ($cart as $id => $product) : ?> 
 
@@ -373,6 +289,7 @@ if (!empty($_SESSION["cart"])) {
              <?php endforeach ?>
              <a class="view_cart_detail" href="./view/view_cart.php?id=">Xem chi tiết</a>
              </div>
+             <?php } ?>
          `,
     allowHTML: true,
     placement: 'bottom',

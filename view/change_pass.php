@@ -177,7 +177,7 @@ if(isset($_POST["bnt-pass"])){
             </div>
             </aside>
             <article style="margin-top: 50px; width: 70%;background-color: white;padding-left: 50px;">
-           <h2>Đổi mật khẩu</h2> 
+           <h2 style="border-left: 5px solid #ee4d2d; padding-left: 10px;">Đổi mật khẩu</h2> 
    <p> Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác</p>
    <hr>
             <form action="" method="POST">
@@ -244,15 +244,13 @@ if(isset($_POST["bnt-pass"])){
     
      tippy('#show_cart', {
         arrow:false,
-        content: `<?php
-        $index=0;
-          ?>
+        content: `<?php if(!empty($cart)){ ?>
               <div class="show_cart"> 
              <?php foreach($cart as $id => $product):?> 
 
 
               <div class="iteam_cart"> 
-              <a  href="./detail.php?id=<?php echo $product["id"] ?>">
+              <a  href="../detail.php?id=<?php echo $product["id"] ?>">
              <p><?php echo $product["productName"] ?></p>
              <div class="typpy_colum">
              <img src="../src/image/<?php echo $product["images"] ?>" alt="">
@@ -265,8 +263,9 @@ if(isset($_POST["bnt-pass"])){
              </a>
              
              <?php endforeach ?>
-             <a class="view_cart_detail" href="./view_cart.php?id=">Xem chi tiết</a>
-             </div>
+             <a class="view_cart_detail" href="../view/view_cart.php?id=">Xem chi tiết</a>
+             </div> 
+             <?php } ?>
          `,
         allowHTML: true, 
         placement: 'bottom',

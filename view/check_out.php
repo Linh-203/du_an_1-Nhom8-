@@ -10,13 +10,18 @@ if (!empty($_SESSION["cart"])) {
     $cart = $_SESSION["cart"];
     $so_luong = count($cart);
 }
+if(!empty($_SESSION["id"])){
+    $id_person = $_SESSION["id"];
+}
+$query = "SELECT * FROM oder where id_user like n'$id_person'";
+$adress_user = getOne($query);
 $Err = "";
 $ship = 50000;
 $count_money = 0;
 $tong_tien = 0;
 $payErr = $adressErr = "";
 $id_person = $_SESSION["id"];
-
+  
 
 if (isset($_POST["vnpay"])) {
     if (empty($_POST["adress"])) {
@@ -34,19 +39,20 @@ if (isset($_POST["submit"])) {
         $adressErr = "Không được bỏ trống";
     }else{
         $note = $_POST["note"];
-        $pay = 0;
+        $pay = 1;
         $status = $_POST["status"];
         $username = $_POST["username"];
         $adress = $_POST["adress"];
         $phone = $_POST["phone"];
+       
         $count_money2 = $_SESSION["money"];
         $total2 = $_SESSION["total"];
-        // $tinh = $_POST["tinh"];
-        // $huyen = $_POST["huyen"];
-        // $xa = $_POST["xa"];
+        $tinh = $_POST["tinh"];
+        $huyen = $_POST["huyen"];
+        $xa = $_POST["xa"];
 
-        $query = "INSERT INTO oder(orderer,phone,adress,pay,total_product,total,status,id_user,note)
-    values('$username','$phone', '$adress', '$pay', '$count_money2', '$total2','$status','$id_person','$note')";
+        $query = "INSERT INTO oder(province,districts,ward,orderer,phone,adress,pay,total_product,total,status,id_user,note)
+    values('$tinh','$huyen','$xa','$username','$phone', '$adress', '$pay', '$count_money2', '$total2','$status','$id_person','$note')";
         connect($query);
         if (!empty($query)) {
             $sql = "SELECT * from oder";
@@ -93,6 +99,10 @@ if (isset($_POST["submit"])) {
 <html lang="en">
 <?php include "./public/head.php" ?>
 <style>
+    #ap{
+        background-color:lavender; font-size: 20px;padding: 5px 10px;border-radius: 5px;
+    }
+    
     .tippy-content{
     
     background-color: #198a19;
@@ -170,22 +180,22 @@ if (isset($_POST["submit"])) {
   }
     #oder{
         transition: linear 1s;
-        background-color: #E4002B;cursor: pointer;font-size: 20px;color: white;padding: 0 20px;margin: 10px 0;border-radius: 35px;width: 400px;
+        background: linear-gradient(90deg,#97c93d,#4fba69);;cursor: pointer;font-size: 20px;color: white;padding: 0 20px;margin: 10px 0;border-radius: 35px;width: 400px;
     }
     #oder:hover{
-        background-color: white;
+        background: white;
         border: 1px solid #E4002B;
-        color: #E4002B;
+        
     }
     #oder2{
         transition: linear 1s;
         border: 1px solid #4fba69;
-        cursor: pointer;display: flex;align-items: center;justify-content: center;background: linear-gradient(90deg,#97c93d,#4fba69);;color:white;width: 400px;padding: 20px;font-size: 20px;border-radius: 35px;
+        cursor: pointer;display: flex;align-items: center;justify-content: center;background-color: #337ab7;color:white;width: 400px;padding: 20px;font-size: 20px;border-radius: 35px;
     }
     #oder2:hover{
-        background:none;
+        background: linear-gradient(90deg,#97c93d,#4fba69);
         border: 1px solid #4fba69;
-        color: #4fba69;
+       
     }
     .form_adress input {
         width: 400px;
@@ -326,20 +336,19 @@ if (isset($_POST["submit"])) {
 
                         <label for="">Số điện thoại:</label> <br>
                         <input type="number" name="phone" id="" value="<?php echo $_SESSION["phone"] ?>"> <br>
-                        <!-- <label for="">Địa chỉ nhận hàng:</label> <br> -->
-                        <!-- <select name="tinh" id="province" >
-                   
+                        <label for="">Địa chỉ nhận hàng:</label> <br> 
+                         <select name="tinh" id="province" >
+                           <option value=""></option>
             </select> 
             <select name="huyen" id="district">
                 <option  value="">Chọn quận</option>
             </select>  <br>
             <select name="xa" id="ward">
                 <option   value="">Chọn phường</option>
-            </select> <br> -->
+            </select> <br> 
                         <label for="">Địa chỉ cụ thể:</label> <br>
                         <input style="" type="text" name="adress" id="" value="<?php
-                                                                                $query = "SELECT * FROM oder where id_user like n'$id_person'";
-                                                                                $adress_user = getOne($query);
+                                                                                
                                                                                 if (!empty($adress_user)) {
                                                                                     echo $adress_user["adress"];
                                                                                 } else if (!empty($_SESSION["adress"])) {
@@ -353,7 +362,7 @@ if (isset($_POST["submit"])) {
                                                                                                     } ?>"> <br>
                         <?php if(!empty($cart)){ ?>
                         <label for="">Chọn hình thức thanh toán:</label> <br>
-                        <button id="oder" onclick="return confirm('Bạn chắc chứ')"  type="submit" name="submit">Nhận hàng rồi thanh toán</button>
+                        <button style="background-color: #337ab7;" id="oder" onclick="return confirm('Bạn chắc chứ')"  type="submit" name="submit">Thanh toán khi nhận hàng</button>
 
                         <!-- <input style="width: 18px;height: 18px;" type="radio" name="pay" id="dialog" value="1"> Nhận hàng rồi thanh toán <br> -->
                         <!-- <div id="vi" style="display: none;background-color: lavenderblush;padding: 10px;">
@@ -363,7 +372,7 @@ if (isset($_POST["submit"])) {
                        
 
                             <button id="oder2"  type="submit" name="vnpay">
-                                <img height="40px" style="margin-right: 10px;" src="https://play-lh.googleusercontent.com/DvCn_h3AdLNNDcv3ftqTqP83gw6h65GMEPg3x6u788wB3F3ENNFcHgrHcWJNOPy4epg" alt=""> Thanh toán bằng VNPAY
+                                <img height="40px" style="margin-right: 10px;" src="../src/image/vnpay.png" alt=""> Thanh toán bằng VNPAY
                             </button>
                        <?php } ?>
                        
@@ -417,6 +426,12 @@ if (isset($_POST["submit"])) {
 
                         </tbody>
                     </table>
+                    <h3 style="margin: 10px 0;margin-top: 30px;font-weight: 500; display: flex;align-items: center;font-size: 20px;">
+                        <p style="color: green;margin-right: 10px;"> Đơn vị vận chuyển:</p>
+                        Vận chuyển nhanh quốc tế <br>
+                        Standard Express <br>
+                        <p style="margin-left: 20px;"> <?php echo $ship ?>₫</p>
+                    </h3>
                     <form action="" method="post" style="margin-top: 30px;">
 
                         <?php
@@ -445,7 +460,7 @@ if (isset($_POST["submit"])) {
                         </select>
                         <!-- <input style="width: 300px; font-size: 18px; padding: 8px;outline: none;" type="text" name="voucher" id="voucher" oninput="return sale()" >  -->
                         <!-- <button name="ap_ma" id="ap" disabled style="background-color: blueviolet;color:aliceblue;font-size: 20px; border: 1px solid red;">áp mã</button> -->
-                        <button disabled name="ap_ma" id="ap" style="background-color:lavender; font-size: 20px;padding: 5px;border-radius: 5px; ">Áp dụng</button>
+                        <button disabled name="ap_ma" id="ap" >Áp dụng</button>
                     </form>
                     <?php
 
@@ -488,12 +503,7 @@ if (isset($_POST["submit"])) {
                     }
 
                     ?>
-                    <h3 style="margin: 10px 0;font-weight: 500; display: flex;align-items: center;">
-                        <p style="color: green;margin-right: 10px;"> Đơn vị vận chuyển:</p>
-                        Vận chuyển nhanh quốc tế <br>
-                        Standard Express <br>
-                        <p style="margin-left: 20px;"> <?php echo $ship ?>₫</p>
-                    </h3>
+                 
 
 
 
@@ -568,9 +578,7 @@ if (isset($_POST["submit"])) {
     
      tippy('#show_cart', {
         arrow:false,
-        content: `<?php
-        $index=0;
-          ?>
+        content: `<?php if(!empty($cart)){ ?>
               <div class="show_cart"> 
              <?php foreach($cart as $id => $product):?> 
 
@@ -589,8 +597,9 @@ if (isset($_POST["submit"])) {
              </a>
              
              <?php endforeach ?>
-             <a class="view_cart_detail" href="./view_cart.php?id=">Xem chi tiết</a>
-             </div>
+             <a class="view_cart_detail" href="../view/view_cart.php?id=">Xem chi tiết</a>
+             </div> 
+             <?php } ?>
          `,
         allowHTML: true, 
         placement: 'bottom',

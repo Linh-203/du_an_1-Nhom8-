@@ -95,7 +95,10 @@ include "../model/connect.php";
   .tippy-content{
     background-color: #ee4d2d;
   }
-  
+  #logout,#ql_tk{
+    color: white;
+    font-weight: 500;
+  }
     
 </style>
 <body>
@@ -161,12 +164,13 @@ include "../model/connect.php";
      
        
       });
+</script>
+<script>
+  
     
      tippy('#show_cart', {
         arrow:false,
-        content: `<?php
-        $index=0;
-          ?>
+        content: `<?php if(!empty($cart)){ ?>
               <div class="show_cart"> 
              <?php foreach($cart as $id => $product):?> 
 
@@ -185,8 +189,9 @@ include "../model/connect.php";
              </a>
              
              <?php endforeach ?>
-             <a class="view_cart_detail" href="./view_cart.php?id=">Xem chi tiết</a>
-             </div>
+             <a class="view_cart_detail" href="../view/view_cart.php?id=">Xem chi tiết</a>
+             </div> 
+             <?php } ?>
          `,
         allowHTML: true, 
         placement: 'bottom',

@@ -7,8 +7,9 @@ class m_comment extends database{
         return $this->loadAllRows();
     }
     public function read_detail_comment(){
-        $sql = "SELECT * FROM comment JOIN products ON comment.id_product=products.id
-        JOIN users ON comment.id_user = users.id ";
+        $sql = "SELECT  users.username, users.id,comment.id_product,comment.date_cmt,content,avatar,comment.id as id_cmt , productName FROM comment
+        JOIN products ON comment.id_product=products.id
+                JOIN users ON comment.id_user = users.id; ";
         $this->setQuery($sql);
         return $this->loadAllRows();
     }
@@ -16,6 +17,11 @@ class m_comment extends database{
         $sql = "delete from comment where id = ? ";
         $this->setQuery($sql);
         return $this->execute(array($id));
+    }
+    public function detail_comment($id){
+        $sql = "select * from oder where id = ?";
+        $this->setQuery($sql); 
+        return $this->loadRow(array($id));
     }
 }
 ?>

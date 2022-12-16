@@ -1,0 +1,340 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;   
+      
+}
+header .me{
+    margin-left: 50px;
+}
+header .me ul li{
+    display: inline-block;
+}
+header .me ul li a{
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    padding: 0 16px;
+}
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color:  rgb(46, 127, 127);
+    /* background-color:  #008339!important; */
+    border-radius: 8px;
+    padding: 10px;
+    max-width: 1450px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+header .left, .right{
+    display: flex;
+    align-items: center;
+    
+}
+header .right form{
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+   
+    border-radius: 7px ;
+    margin-right: 40px;
+    background-color: white;
+    color: black;
+    border: none;
+
+    
+}
+header .right input{
+    width: 450px;
+    margin-left: 10px;
+    font-size: 18px;
+   
+}
+header .right input, button{
+    border: none;
+    outline: none;
+    background: none;
+    height: 40px;
+}
+
+header .icon{
+    font-size: 25px;
+    color: white;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.container{
+    max-width: 1230px;
+    margin: 0 auto;
+
+}
+h1{
+    color: rgb(85, 85, 85);
+}
+.container a{
+    text-decoration: none;
+    color: black;
+}
+.menu{
+    margin: 30px 0;
+    text-align: center;
+}
+.menu ul li{
+    display: inline-block;
+    padding-left: 50px;
+}
+.menu ul li a{
+   font-size: 18px;
+   font-weight: 500;
+}
+.menu a:hover{
+   text-decoration: underline;
+   color: red;
+ }
+.hang1{
+    display: flex;
+    grid-gap: 30px;
+}
+.trai1{
+    display: flex;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 20px;
+ 
+}
+.phai1{
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 20px;
+  
+}
+
+.cot1{
+display: flex;
+grid-gap: 10px;
+
+}
+.cot2{
+display: flex;
+grid-gap: 10px;
+padding-top: 7px;
+}
+.cot3{
+display: flex;
+grid-gap: 10px;
+padding-top: 7px;
+}
+.cot4{
+display: flex;
+grid-gap: 10px;
+padding-top: 7px;
+}
+.trai1{
+    grid-gap: 20px;
+}
+.dong{
+    padding: 10px 0;
+}
+hr{
+   margin-top: 15px;
+}
+.trai1 p{
+    color: gray;
+}
+.khung2{
+    display: flex;
+    margin-top: 30px;
+    grid-gap: 30px;
+}
+.doc{
+    display: flex;
+    grid-gap: 10px;
+    padding-top: 20px;
+}
+.doc2{
+    display: flex;
+   margin-top: 15px;
+   grid-gap: 10px;
+}
+.trai2{
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 20px;
+   
+}
+.phai2{
+    border: 1px solid gray;
+    width: 328px;
+    border-radius: 5px;
+    padding: 20px; 
+   
+}
+.trai2 h3{
+    font-size: 25px;
+    padding-bottom: 10px;
+}
+.phai3{
+    border: 1px solid gray;
+    width: 328px;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    /* box-shadow: 1px 1px 2px 2px rgb(198, 198, 198); */
+}
+.phai3 img{
+    width: 280px;
+   height: 150px;
+}
+.anh1{
+    padding-top: 20px;
+}
+.doc iframe{
+    width: 100%;
+}
+.phai3 h4{
+    text-align: center;
+    padding-top: 10px;
+}
+
+
+
+
+
+/* background-color: rgb(174, 207, 207);   */
+
+.cuoi{
+   background-color: rgb(46, 127, 127);  
+   padding: 45px;
+   display: flex;
+   max-width: 1450px;
+   margin: 0 auto;
+   border-radius: 10px;
+   margin-top: 30px;
+}
+
+.mot img{
+    width: 110px;
+    height: 50px;
+    border-radius: 0 15px;
+}
+.mot{
+   margin-left: 45px;
+}
+.mot h2{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.mot h3{
+    padding-top: 20px;
+}
+.icon .fa-regular{
+    margin-left: 20px;
+    margin-top: 30px;
+}
+.hai{
+    margin: 0 35px;
+}
+.hai h4{
+    margin-top: 20px;
+   
+}
+.hai h4 li{
+    margin-top: 10px;
+}
+
+.ba{
+    margin: 0 35px;
+}
+.ba h4{
+    margin-top: 20px;
+   
+}
+.ba h4 li{
+    margin-top: 10px;
+}
+
+.bon{
+    margin: 0 35px;
+}
+.bon h4{
+    margin-top: 20px;
+   
+}
+.bon h4 li{
+    margin-top: 10px;
+}
+.nam hr{
+margin-top: 30px;
+}
+.nam{
+    margin-left: 25px;
+}
+.nam input{
+    border: none;
+    margin-left: 15px;
+    padding-top: 13px;
+    width: 200px;
+   outline: none;
+ 
+}
+#xuong{
+   padding: 20px 0;
+}
+#dich{
+    padding-left: 45px;
+}
+.nam h3 i{
+    padding-left: 7px;
+    font-size: 25px;
+}
+#kinh{
+    color: black;
+}
+.tkiem{
+border: 2px solid rgb(8, 114, 133);
+width: 250px;
+height: 40px;
+background-color: white;
+border: none;
+border-radius: 20px;
+margin-top: 15px;
+}
+

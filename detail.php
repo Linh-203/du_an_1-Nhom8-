@@ -44,6 +44,7 @@ $show_cmt = getAll($query);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -51,7 +52,7 @@ $show_cmt = getAll($query);
   <title>Document</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
-  <link rel="stylesheet" href="./src/css/indev.css">
+  <link rel="stylesheet" href="./src/css/index.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter&family=Quicksand&family=Roboto:wght@100&display=swap" rel="stylesheet">
@@ -60,6 +61,19 @@ $show_cmt = getAll($query);
    <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
 </head>
 <style>
+  #delete{
+    border: 1px solid #c0392b;
+    background-color: #c0392b;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: 1s;
+  }
+  #delete:hover{
+    background-color: white;
+    border: 1px solid #c0392b;
+    color: #c0392b;
+  }
   .typpy_colum{
     display: flex;
     align-items: center;
@@ -223,7 +237,7 @@ $show_cmt = getAll($query);
         
         </form>
          <?php }else{ ?>
-          <a href="./view/login.php">Thêm giỏ hàng</a> <?php } ?>
+          <a  style="transition: 3s;color: white ;font-size: 20px;cursor: pointer;padding: 10px 20px; background-color: #ee4d2d;" href="../du_an_1-nhom8-/login"><i style="color:white" class="fa fa-cart-plus" ></i>Thêm giỏ hàng</a> <?php } ?>
           <?php } ?>
         <p style="font-size: 16px;text-align: right;color: red;">Đổi trả và Bảo hành 100% Chính hãng <br>
           15 ngày trả hàng <br></p>
@@ -261,7 +275,7 @@ $show_cmt = getAll($query);
         <?php if(!empty($_SESSION["id"])){?>
         <button id="submit" name="submit" disabled style="background-color: lavender; border-radius: 40px;color: black;font-weight: 500;font-size: 20px; padding: 0 10px;;" type="submit">Bình luận</button>
        <?php }else{ ?>
-       <a href="./view/login.php"style="background-color: lavender; border-radius: 40px;color: black;font-weight: 500;font-size: 20px; padding:  10px;;" >Bình luận</a>
+       <a href="./login"style="background-color: lavender; border-radius: 40px;color: black;font-weight: 500;font-size: 20px; padding:  10px;;" >Bình luận</a>
         <?php } ?>
       </div>
     </form>
@@ -270,19 +284,19 @@ $show_cmt = getAll($query);
 
       <?php
       foreach ($show_cmt as $value) { ?>
-        <div class="comment" style="display: flex;background-color: lavender;margin-top: 20px;padding: 20px;;">
+        <div class="comment" style="display: flex;background-color: #f8f8f8;margin-top: 20px;padding: 20px;;">
           <img height="50px" width="50px" style="border-radius: 100%;" src="./src/image/<?php echo $value["avatar"]; ?>" alt="">
           <div class="led" style="margin-left: 10px;">
             <div style="display: flex; border-bottom: 1px dashed black;">
               <p style="font-size: 18px; font-weight: 500;"><?php echo $value["username"]; ?></p>
               <p style="margin-left: 10px;"><?php echo $value["date_cmt"]; ?></p>
             </div>
-            <p style="margin-top: 10px;"><?php echo $value["content"]; ?></p>
+            <p style="margin-top: 10px; margin-bottom: 20px;"><?php echo $value["content"]; ?></p>
             <?php if(!empty($_SESSION["id"])){
               $id_person = $_SESSION["id"];
             
             if ($id_person == $value["id_user"]) { ?>
-              <a href="./controller/delete_cmt.php?id=<?php echo $value["id_cmt"]?>&idsp=<?php echo $id ?>">XÓA</a>
+              <a id="delete" href="./controller/delete_cmt.php?id=<?php echo $value["id_cmt"]?>&idsp=<?php echo $id ?>">XÓA</a>
             <?php }
             } ?>
           </div>
@@ -396,9 +410,7 @@ $show_cmt = getAll($query);
   <script>
      tippy('#show_cart', {
         arrow:false,
-        content: `<?php
-        $index=0;
-          ?>
+        content: `<?php if(!empty($cart)){ ?>
               <div class="show_cart"> 
              <?php foreach($cart as $id => $product):?> 
 
@@ -418,7 +430,8 @@ $show_cmt = getAll($query);
              
              <?php endforeach ?>
              <a class="view_cart_detail" href="./view/view_cart.php?id=">Xem chi tiết</a>
-             </div>
+             </div> 
+             <?php } ?>
          `,
         allowHTML: true, 
         placement: 'bottom',

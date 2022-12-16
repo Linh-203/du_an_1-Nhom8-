@@ -75,6 +75,8 @@ if(!empty($_POST["phone"]) && !empty($_POST["username"]) && !empty( $_FILES["ava
     $query = "INSERT INTO users(id,username,avatar,pass,phone,email,role,status) 
 	values ('$code','$userName','$avatar','$password','$phone','$email','$role','$status') ";
     connect($query);
+	move_uploaded_file($_FILES["avatar"]["tmp_name"],"../src/image/".$_FILES["avatar"]["name"]);
+
     $alert = "Đăng ký thành công";
     header("location:../login?type=$alert"); 
     }
@@ -196,10 +198,11 @@ if(!empty($_POST["phone"]) && !empty($_POST["username"]) && !empty( $_FILES["ava
 							Đăng ký
 						</button>
 					</div>
-
-					<div class="text-center p-t-90">
+                   
+					<div class="text-center p-t-90" style="margin-top: -60px;">
+					<span>Bạn có tài khoản rồi ?</span> <a style="color: white;" href="../login/">Đăng nhập ngay</a> <br>
 						<a class="txt1" href="#">
-							Forgot Password?
+							Bạn quên mật khẩu ?
 						</a>
 					</div>
 				</form>

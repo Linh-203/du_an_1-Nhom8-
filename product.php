@@ -194,12 +194,18 @@
         </div>
         <h2>Lọc giá sản phẩm</h2>
         <form id="form" action="./product.php" method="POST" onchange="change()">
-            <input style="width: 300px;" id="locgia" type="range" name="price" id="" min="0" max="1000000">
+            <input style="width: 300px;" id="locgia" type="range" name="price" id="" min="0" max="9000000">
             <span id="price"></span>
-            <button name="loc" id="loc" type="submit" style="font-size: 20px; background-color:lavender ;">Lọc</button>
+            <button name="loc" id="" type="submit" style="font-size: 20px; background-color:#ee4d2d;padding: 0 10px;color:white ;">Lọc</button>
         </form>
+        <?php if(isset($_POST["loc"]) || isset($_POST["submit_search"])){
+          if(!empty($product1)){ ?>
+            <h1 style=" background: transparent linear-gradient(90deg,#009981 0%,#00483d 100%) 0% 0% no-repeat;
+    color: white; display: inline-block; margin: 20px 0;padding:10px; border-radius: 5px;">XIAMAO </h1>
+      <?php  }}else{ ?>
         <h1 style=" background: transparent linear-gradient(90deg,#009981 0%,#00483d 100%) 0% 0% no-repeat;
-    color: white; display: inline-block; margin: 20px 0;padding:10px; border-radius: 5px;">Apple</h1>
+    color: white; display: inline-block; margin: 20px 0;padding:10px; border-radius: 5px;">XIAMAO </h1>
+    <?php  } ?>
         
         <div class="product">
         <?php foreach($product1 as $value):?>
@@ -239,8 +245,14 @@
         </div>
          
         
+        <?php if(isset($_POST["loc"]) || isset($_POST["submit_search"])){
+          if(!empty($product3)){ ?>
+            <h1 style=" background: transparent linear-gradient(90deg,#009981 0%,#00483d 100%) 0% 0% no-repeat;
+    color: white; display: inline-block; margin: 20px 0;padding:10px; border-radius: 5px;">NOSIBA </h1>
+      <?php  }}else{ ?>
         <h1 style=" background: transparent linear-gradient(90deg,#009981 0%,#00483d 100%) 0% 0% no-repeat;
-    color: white; display: inline-block; margin: 20px 0;padding:10px; border-radius: 5px;">LIGE</h1>
+        color: white; display: inline-block; margin: 20px 0;padding:10px; border-radius: 5px;">NOSIBA </h1>
+    <?php  } ?>
         <div class="product">
         <?php foreach($product3 as $value):?>
             <div class="colum">
@@ -277,8 +289,14 @@
             </div>
             <?php endforeach?>
         </div>
+        <?php if(isset($_POST["loc"]) || isset($_POST["submit_search"])){
+          if(!empty($product5)){ ?>
+            <h1 style=" background: transparent linear-gradient(90deg,#009981 0%,#00483d 100%) 0% 0% no-repeat;
+    color: white; display: inline-block; margin: 20px 0;padding:10px; border-radius: 5px;">APPLE </h1>
+      <?php  }}else{ ?>
         <h1 style=" background: transparent linear-gradient(90deg,#009981 0%,#00483d 100%) 0% 0% no-repeat;
-    color: white; display: inline-block; margin: 20px 0;padding:10px; border-radius: 5px;">XIAOMI </h1>
+        color: white; display: inline-block; margin: 20px 0;padding:10px; border-radius: 5px;">APPLE </h1>
+    <?php  } ?>
         <div class="product">
         <?php foreach($product5 as $value):?>
             <div class="colum">
@@ -315,8 +333,14 @@
             </div>
             <?php endforeach?>
         </div>
+        <?php if(isset($_POST["loc"]) || isset($_POST["submit_search"])){
+          if(!empty($product8)){ ?>
+            <h1 style=" background: transparent linear-gradient(90deg,#009981 0%,#00483d 100%) 0% 0% no-repeat;
+    color: white; display: inline-block; margin: 20px 0;padding:10px; border-radius: 5px;">LIGE </h1>
+      <?php  }}else{ ?>
         <h1 style=" background: transparent linear-gradient(90deg,#009981 0%,#00483d 100%) 0% 0% no-repeat;
-    color: white; display: inline-block; margin: 20px 0;padding:10px; border-radius: 5px;">AMA </h1>
+        color: white; display: inline-block; margin: 20px 0;padding:10px; border-radius: 5px;">LIGE </h1>
+    <?php  } ?>
         <div class="product">
         <?php foreach($product8 as $value):?>
             <div class="colum">
@@ -352,13 +376,13 @@
                 
             </div>
             <?php endforeach?>
-        </div> <?php if(isset($_POST["loc"])){
+        </div> <?php if(isset($_POST["loc"]) || isset($_POST["submit_search"])){
           if(!empty($product4)){ ?>
             <h1 style=" background: transparent linear-gradient(90deg,#009981 0%,#00483d 100%) 0% 0% no-repeat;
-    color: white; display: inline-block; margin: 20px 0;padding:10px; border-radius: 5px;">NOSIBA </h1>
+    color: white; display: inline-block; margin: 20px 0;padding:10px; border-radius: 5px;">AMA </h1>
       <?php  }}else{ ?>
         <h1 style=" background: transparent linear-gradient(90deg,#009981 0%,#00483d 100%) 0% 0% no-repeat;
-        color: white; display: inline-block; margin: 20px 0;padding:10px; border-radius: 5px;">NOSIBA </h1>
+        color: white; display: inline-block; margin: 20px 0;padding:10px; border-radius: 5px;">AMA </h1>
     <?php  } ?>
         
         <div class="product">
@@ -490,9 +514,7 @@
 <script>
      tippy('#show_cart', {
         arrow:false,
-        content: `<?php
-        $index=0;
-          ?>
+        content: `<?php if(!empty($cart)){ ?>
               <div class="show_cart"> 
              <?php foreach($cart as $id => $product):?> 
 
@@ -512,7 +534,8 @@
              
              <?php endforeach ?>
              <a class="view_cart_detail" href="./view/view_cart.php?id=">Xem chi tiết</a>
-             </div>
+             </div> 
+             <?php } ?>
          `,
         allowHTML: true, 
         placement: 'bottom',

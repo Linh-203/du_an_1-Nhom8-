@@ -9,6 +9,8 @@ if(empty($_SESSION["id"])){
         $act = $_GET['act'];
         if($act == 'delete'){
             $comment->delete_comment();
+        }else if($act == 'detail'){
+             $comment ->detail_comment();
         }
     }else{
         $comment->show_comment();

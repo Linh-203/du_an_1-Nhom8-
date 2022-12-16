@@ -12,12 +12,7 @@
           <button name="submit_search" ><i style="font-size: 20px;border-radius: 0 7px 7px 0;background-color: rgba(243, 168, 71, 1);height: 40px; padding:10px;text-align: center; " class="fa fa-search"></i></button>
         </form>
         <div class="icon" style="display: flex;align-items: center;color: white;">
-        <?php if(!empty($_SESSION["id"])){?>
-                   <a href="./view/favorite_product.php" style="color:white"> <i class="fas fa-heart"></i></a>
-                   <?php }else{ ?>
-                    <a href="../du_an_1-nhom8-/login" style="color:white"> <i class="fas fa-heart"></i></a>
-                    <?php }?>
-
+         <a href="./view/favorite_product.php" style="color:white"> <i class="fas fa-heart"></i></a>
           <a href="./view/list-bill.php"><i style="margin: 0 20px;" class="fas fa-clipboard-list"></i></a>
 
           <a id="show_cart" style="display: flex; margin-right: 30px;text-decoration: none;" href="./view/view_cart.php?id="> <i id="count" style="margin-right: 30px;color: lavender;" class="fas fa-shopping-bag"></i>
@@ -33,9 +28,9 @@
           </a>
 
           <?php if (empty($_SESSION["id"])) { ?>
-          <a href="../du_an_1/login"> <i class="fas fa-user"></i></a> 
+          <a href="../du_an_1-nhom8-/login/"> <i class="fas fa-user"></i></a> 
           <?php } else { ?>
-          <a href="../du_an_1/view/account.php" id="user_hover">  <img height="40px" width="40px" style="border-radius: 50%;" src="./src/image/<?php echo $_SESSION["avatar"] ?>" alt=""></a>
+          <a href="../du_an_1-nhom8-/view/account.php" id="user_hover">  <img height="40px" width="40px" style="border-radius: 50%;" src="./src/image/<?php echo $_SESSION["avatar"] ?>" alt=""></a>
           <?php } ?>
 
         </div>
@@ -48,7 +43,7 @@
             <li><a href="./index.php"><i class="fa fa-home-lg-alt"></i> Trang chủ</a></li>
             <li><a href="./product.php">Sản phẩm</a></li>
             <li><a href="./view/news.php">Tin tức</a></li>
-            <li><a href="">Giới thiệu</a></li>
+            <li><a href="../view/gioi_thieu.php">Giới thiệu</a></li>
 
           </ul>
          

@@ -185,7 +185,7 @@ $nameErr = $phoneErr = $emailErr = "";
         <div class="voucher" style="display: grid;margin-top: 20px;grid-template-columns: repeat(2,1fr);grid-gap: 20px;">
           <?php foreach ($voucher as $value) : ?>
             <div class="colum_voucher" style="display: flex;box-shadow: 0 0 20px lightgrey;">
-              <img style="height: 150px;" src="<?php echo $value["img"] ?>" alt="">
+              <img style="height: 150px;" src="../src/image/<?php echo $value["img"] ?>" alt="">
 
               <div class="item" style="padding-left: 30px;padding-top: 20px;width: 100%;">
                 <p style="font-size: 20px; font-weight: 500; color:#ee4d2d;">Giảm <?php echo $value["sale"] ?>%</p>
@@ -231,15 +231,13 @@ $nameErr = $phoneErr = $emailErr = "";
 <script>
   tippy('#show_cart', {
     arrow: false,
-    content: `<?php
-              $index = 0;
-              ?>
+    content: `<?php if(!empty($cart)){ ?>
               <div class="show_cart"> 
-             <?php foreach ($cart as $id => $product) : ?> 
+             <?php foreach($cart as $id => $product):?> 
 
 
               <div class="iteam_cart"> 
-              <a  href="./detail.php?id=<?php echo $product["id"] ?>">
+              <a  href="../detail.php?id=<?php echo $product["id"] ?>">
              <p><?php echo $product["productName"] ?></p>
              <div class="typpy_colum">
              <img src="../src/image/<?php echo $product["images"] ?>" alt="">
@@ -252,8 +250,9 @@ $nameErr = $phoneErr = $emailErr = "";
              </a>
              
              <?php endforeach ?>
-             <a class="view_cart_detail" href="./view/view_cart.php?id=">Xem chi tiết</a>
-             </div>
+             <a class="view_cart_detail" href="../view/view_cart.php?id=">Xem chi tiết</a>
+             </div> 
+             <?php } ?>
          `,
     allowHTML: true,
     placement: 'bottom',
